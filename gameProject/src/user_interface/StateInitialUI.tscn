@@ -28,8 +28,8 @@ font_data = ExtResource( 11 )
 [node name="StateInitialUI" instance=ExtResource( 1 )]
 
 [node name="Background" type="Sprite" parent="." index="0"]
-position = Vector2( 959.273, 541.156 )
-scale = Vector2( 0.197629, 0.198901 )
+position = Vector2( 962.602, 539.013 )
+scale = Vector2( 1.7446, 1.75832 )
 texture = ExtResource( 4 )
 
 [node name="PlayButton" type="TextureButton" parent="." index="1"]
