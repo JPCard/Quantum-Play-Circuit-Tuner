@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/user_interface/StateUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/InitialMenuUI/configButton.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/art/InitialMenuUI/freeModeUIButton_Pressed.png" type="Texture" id=9]
 [ext_resource path="res://assets/art/InitialMenuUI/levelSelectUIButton.png" type="Texture" id=10]
 [ext_resource path="res://assets/fonts/Orkney/Orkney Bold.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://src/user_interface/StateInitialUI.gd" type="Script" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -26,13 +27,14 @@ use_filter = true
 font_data = ExtResource( 11 )
 
 [node name="StateInitialUI" instance=ExtResource( 1 )]
+script = ExtResource( 12 )
 
 [node name="Background" type="Sprite" parent="." index="0"]
 position = Vector2( 962.602, 539.013 )
 scale = Vector2( 1.7446, 1.75832 )
 texture = ExtResource( 4 )
 
-[node name="PlayButton" type="TextureButton" parent="." index="1"]
+[node name="PlayBt" type="TextureButton" parent="." index="1"]
 margin_left = 1006.78
 margin_top = 476.0
 margin_right = 1409.78
@@ -44,7 +46,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelSelectButton" type="TextureButton" parent="." index="2"]
+[node name="LevelSelectBt" type="TextureButton" parent="." index="2"]
 margin_left = 585.0
 margin_top = 474.0
 margin_right = 832.0
@@ -56,7 +58,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FreeModeButton" type="TextureButton" parent="." index="3"]
+[node name="FreeModeBt" type="TextureButton" parent="." index="3"]
 margin_left = 515.0
 margin_top = 738.0
 margin_right = 921.0
@@ -68,7 +70,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ConfigButton" type="TextureButton" parent="." index="4"]
+[node name="ConfigBt" type="TextureButton" parent="." index="4"]
 margin_left = 1657.87
 margin_top = 77.1937
 margin_right = 1829.87
@@ -80,7 +82,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FreeModeButtonLabel" type="Label" parent="." index="5"]
+[node name="FreeModeBtLabel" type="Label" parent="." index="5"]
 margin_left = 512.0
 margin_top = 736.0
 margin_right = 920.0
@@ -108,3 +110,4 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="pressed" from="LevelSelectBt" to="." method="toLevelSelectUI"]
