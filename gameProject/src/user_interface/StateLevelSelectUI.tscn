@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/user_interface/StateUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/LevelSelectUI/titleBanner.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/LevelSelectUI/background.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/LevelSelectUI/backBt.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/LevelSelectUI/backBt_Pressed.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/Orkney/Orkney Bold.otf" type="DynamicFontData" id=6]
+[ext_resource path="res://src/user_interface/StateLevelSelectUI.gd" type="Script" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 140
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 6 )
+
+[node name="StateLevelSelectUI" instance=ExtResource( 1 )]
+script = ExtResource( 7 )
+
+[node name="Background" type="Sprite" parent="." index="0"]
+position = Vector2( 962.419, 541.945 )
+scale = Vector2( 0.961616, 0.962531 )
+texture = ExtResource( 3 )
+
+[node name="TitleBanner" type="Sprite" parent="." index="1"]
+position = Vector2( 959.783, 119.285 )
+scale = Vector2( 0.380792, 0.340094 )
+texture = ExtResource( 2 )
+
+[node name="BackBt" type="TextureButton" parent="." index="2"]
+margin_left = 48.9795
+margin_top = 32.4388
+margin_right = 253.979
+margin_bottom = 211.439
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLabel" type="Label" parent="." index="3"]
+margin_right = 1921.0
+margin_bottom = 241.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0666667, 0.176471, 0.305882, 1 )
+text = "Niveles"
+align = 1
+valign = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." index="4"]
+margin_left = 180.0
+margin_top = 240.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+scroll_horizontal_enabled = false
+scroll_deadzone = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" index="0"]
+mouse_filter = 2
+custom_constants/separation = 125
+[connection signal="pressed" from="BackBt" to="." method="backButtonPressed"]
