@@ -35,6 +35,7 @@ config/quit_on_go_back=false
 [autoload]
 
 GameGlobals="*res://src/GameGlobals.gd"
+Persistence="*res://src/persistence/Persistence.gd"
 GameDataExpert="*res://src/GameDataExpert.gd"
 
 [display]
