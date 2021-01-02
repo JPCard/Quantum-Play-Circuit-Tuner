@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/scrollBase.png-f547b9ff4ca1c5a6e3a033c5f9fb39e2.stex"
+path="res://.import/circuitLine.png-b475bc63df3ef06844dea68a0823b013.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/LevelSelectUI/scrollBase.png"
-dest_files=[ "res://.import/scrollBase.png-f547b9ff4ca1c5a6e3a033c5f9fb39e2.stex" ]
+source_file="res://assets/art/InGameUI/circuit/circuitLine.png"
+dest_files=[ "res://.import/circuitLine.png-b475bc63df3ef06844dea68a0823b013.stex" ]
 
 [params]
 

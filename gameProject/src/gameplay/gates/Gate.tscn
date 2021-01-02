@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="Gate" type="Control"]
+margin_left = 1.0
+margin_right = 74.0
+margin_bottom = 74.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]

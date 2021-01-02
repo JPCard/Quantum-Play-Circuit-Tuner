@@ -1,24 +1,28 @@
-extends "res://src/user_interface/StateUI.gd"
+extends "res://src/user_interface/statesUI/StateUI.gd"
 
 
 
 const COUNTRY_COUNT_X: int = 3
-const BT_SEPARATION_X: int = 180
+const BT_SEPARATION_X: int = 250
 
 const LevelBtType = preload("res://src/user_interface/LevelBt.gd")
 const LevelBtFactory = preload("res://src/user_interface/LevelBtFactory.gd")
 
+onready var inGameClassicUI = loadStateUI("StateInGameClassic1QbitUI")
+
 var vBoxContainer: VBoxContainer 
-var InitialUI: StateUI
+var initialUI: StateUI
+
+
 
 func _ready():
 	#yield(get_tree(), "idle_frame") #espera a que se terminen de agregar los botones y se recalcule el tamaño del ScrollContainer
 	$ScrollContainer.scroll_vertical = GameDataExpert.obtainLevelListScroll()
-
+	$TitleBanner.setTitle("Niveles")
 
 
 func init(prevUI: StateUI)->void:
-	InitialUI = prevUI
+	initialUI = prevUI
 	
 	vBoxContainer = $ScrollContainer/VBoxContainer
 	
@@ -77,7 +81,7 @@ func createLevelBtRow(rowNumber: int, levelBtInRow: int, maxUnlockedlevelID: int
 		
 		
 		if unlocked:
-			auxLevelBt.connect("pressed", self, "toInGameUI",[auxLevelBt.getLevelID()])
+			auxLevelBt.connect("pressed", self, "toInGameClassicUI",[auxLevelBt.getLevelID()])
 		
 		
 		auxHBoxContainer.call_deferred("add_child",auxLevelBt)
@@ -100,6 +104,11 @@ func createHBoxContainer()->HBoxContainer:
 	return hBoxContainer
 
 
+func toInGameClassicUI(levelID: int):
+	inGameClassicUI.init(self,levelID)
+	get_parent().call_deferred("add_child",inGameClassicUI)
+	get_parent().call_deferred("remove_child",self)
+
 func backButtonPressed()->void:
-	get_parent().call_deferred("add_child",InitialUI)
+	get_parent().call_deferred("add_child",initialUI)
 	get_parent().call_deferred("remove_child",self)
