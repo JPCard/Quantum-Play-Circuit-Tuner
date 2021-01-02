@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/scrollBase.png-f547b9ff4ca1c5a6e3a033c5f9fb39e2.stex"
+path="res://.import/QbitViewBtMatrixSelected.png-e34e5cb8e7c376a9ed11c80f75c86324.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/LevelSelectUI/scrollBase.png"
-dest_files=[ "res://.import/scrollBase.png-f547b9ff4ca1c5a6e3a033c5f9fb39e2.stex" ]
+source_file="res://assets/art/InGameUI/QbitViewBtMatrixSelected.png"
+dest_files=[ "res://.import/QbitViewBtMatrixSelected.png-e34e5cb8e7c376a9ed11c80f75c86324.stex" ]
 
 [params]
 

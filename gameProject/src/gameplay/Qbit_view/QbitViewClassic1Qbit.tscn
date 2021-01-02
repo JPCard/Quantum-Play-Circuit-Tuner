@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/gameplay/Qbit_view/QbitView.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/fonts/Orkney/Orkney Bold.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://src/gameplay/Qbit_view/sphere_view/Qbit_sphere_views/SphereView1Qbit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/gameplay/Qbit_view/QbitViewClassic1Qbit.gd" type="Script" id=4]
+[ext_resource path="res://src/gameplay/Qbit_view/matrix_view/MatrixView1Qbit.tscn" type="PackedScene" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 90
+font_data = ExtResource( 2 )
+
+[node name="QbitViewClassic1Qbit" instance=ExtResource( 1 )]
+margin_bottom = 751.0
+script = ExtResource( 4 )
+
+[node name="QbitViewBt" parent="." index="0"]
+margin_left = 181.0
+margin_right = 665.0
+
+[node name="CurrentLabel" type="Label" parent="." index="1"]
+margin_left = 5.65686
+margin_top = 138.593
+margin_right = 430.657
+margin_bottom = 299.593
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0666667, 0.176471, 0.305882, 1 )
+text = "Actual"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoalLabel" type="Label" parent="." index="2"]
+margin_left = 437.657
+margin_top = 138.593
+margin_right = 862.657
+margin_bottom = 299.593
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0666667, 0.176471, 0.305882, 1 )
+text = "Objetivo"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spheres" parent="." index="3"]
+margin_top = 233.0
+margin_bottom = 677.0
+
+[node name="CurrentSphereView1Qbit" parent="Spheres" index="0" instance=ExtResource( 3 )]
+margin_left = 70.7107
+margin_top = 63.696
+margin_right = 330.711
+margin_bottom = 367.696
+rect_scale = Vector2( 1.2, 1.2 )
+mouse_filter = 2
+
+[node name="GoalSphereView1Qbit" parent="Spheres" index="1" instance=ExtResource( 3 )]
+margin_left = 487.446
+margin_top = 63.696
+margin_right = 747.446
+margin_bottom = 367.696
+rect_scale = Vector2( 1.2, 1.2 )
+mouse_filter = 2
+
+[node name="Matrices" parent="." index="4"]
+visible = false
+margin_top = 264.0
+margin_bottom = 876.0
+
+[node name="CurrentMatrixView1Qbit" parent="Matrices" index="0" instance=ExtResource( 5 )]
+position = Vector2( 48, 32 )
+
+[node name="GoalMatrixView1Qbit" parent="Matrices" index="1" instance=ExtResource( 5 )]
+position = Vector2( 472, 32 )

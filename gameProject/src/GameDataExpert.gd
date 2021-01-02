@@ -1,9 +1,6 @@
 extends Node
 
 
-func _init():
-	pass
-
 
 func obtainCompleted()->bool:
 	return Persistence.loadCompleted()
@@ -36,7 +33,7 @@ func obtainLevelCount()->int:
 func obtainMaxUnlockedLevelID()->int:
 	return obtainMaxCompletedLevelID() + 1
 
-
+# Asume desbloqueo secuencial de niveles
 func obtainLevelCompletionState(levelID)->bool:
 	return levelID <= obtainMaxCompletedLevelID()
 

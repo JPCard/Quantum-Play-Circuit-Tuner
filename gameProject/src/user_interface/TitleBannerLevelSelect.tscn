@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/art/LevelSelectUI/titleBanner.png" type="Texture" id=1]
+[ext_resource path="res://src/user_interface/TitleBannerLevelSelect.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/Orkney/Orkney Bold.otf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 150
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="TitleBannerLevelSelect" type="Sprite"]
+texture = ExtResource( 1 )
+centered = false
+script = ExtResource( 2 )
+
+[node name="TitleLabel" type="Label" parent="."]
+margin_top = 20.0
+margin_right = 1920.0
+margin_bottom = 269.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0666667, 0.176471, 0.305882, 1 )
+text = "Niveles"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
