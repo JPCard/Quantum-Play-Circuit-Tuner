@@ -23,3 +23,6 @@ func rotateSpheresHorizontally(rotY: float)->void:
 func renderSpheres()->void:
 	pass
 
+
+func rotateStateArrow(rotX: float, rotY: float, rotZ: float)->void:
+	pass

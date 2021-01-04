@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/gameplay/circuit/GateHolder.gd" type="Script" id=2]
+[ext_resource path="res://src/gameplay/circuit/DropZone.gd" type="Script" id=4]
+
+[node name="GateHolder" type="Control"]
+margin_right = 147.0
+margin_bottom = 141.0
+rect_min_size = Vector2( 147, 141 )
+mouse_filter = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+centered = false
+
+[node name="DropZone" type="Control" parent="."]
+margin_left = -30.0
+margin_top = -30.0
+margin_right = 175.0
+margin_bottom = 251.0
+mouse_filter = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="gate_dropped" from="DropZone" to="." method="gateDrop"]

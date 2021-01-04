@@ -22,11 +22,13 @@ func rotateFirstGoalQbitStateArrow(rotX: float, rotY: float, rotZ: float)->void:
 	goalSphereView1Qbit.rotateStateArrow(rotX, rotY, rotZ)
 
 
-func updateCurrentQbitSystem(matrix:Array)->void:
-	currentMatrixView1Qbit.updateQbitSystem(matrix)
+func updateCurrentQbitSystem(qbitStateMatrix:Array)->void:
+	$Matrices/CurrentMatrixView1Qbit.updateQbitSystem(qbitStateMatrix)
+	#rotateFirstCurrentQbitStateArrow(rotX,rotY,rotZ)
 
-func updateGoalQbitSystem(matrix:Array)->void:
-	goalMatrixView1Qbit.updateQbitSystem(matrix)
+func updateGoalQbitSystem(qbitStateMatrix:Array)->void:
+	$Matrices/GoalMatrixView1Qbit.updateQbitSystem(qbitStateMatrix)
+	#rotateFirstGoalQbitStateArrow(rotX,rotY,rotZ)
 
 
 func rotateSpheresHorizontally(rotY: float)->void:

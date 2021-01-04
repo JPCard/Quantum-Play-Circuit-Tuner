@@ -27,19 +27,21 @@ func saveCurrentLevelID(levelID: int)->void:
 	Persistence.saveCurrentLevelID(levelID)
 
 func obtainLevelCount()->int:
-	return 10
+	return Persistence.loadLevelCount()
 
 # Asume desbloqueo secuencial de niveles
 func obtainMaxUnlockedLevelID()->int:
 	return obtainMaxCompletedLevelID() + 1
 
 # Asume desbloqueo secuencial de niveles
-func obtainLevelCompletionState(levelID)->bool:
+func obtainLevelCompletionState(levelID: int)->bool:
 	return levelID <= obtainMaxCompletedLevelID()
 
+func obtainInitialStateMatrix(levelID: int)->Array:
+	return Persistence.loadInitialStateMatrix(levelID)
 
-
-
+func obtainGoalStateMatrix(levelID: int)->Array:
+	return Persistence.loadGoalStateMatrix(levelID)
 
 
 

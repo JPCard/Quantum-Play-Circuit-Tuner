@@ -14,6 +14,19 @@ var completed: bool setget setCompleted, isCompleted
 var maxCompletedLevelID: int setget setMaxCompletedLevelID, getMaxCompletedLevelID
 var levelListScroll: int setget setLevelListScroll, getLevelListScroll
 var currentLevelID: int setget setCurrentLevelID, getCurrentLevelID
+var initialStateMatrices: Array = []
+var goalStateMatrices: Array = []
+
+
+var complexi = Complex.new().init(0,1)
+var complexNegativei = Complex.new().init(0,-1)
+var complex0 = Complex.new().init(0,0)
+var complex1 = Complex.new().init(1,0)
+var complexNegative1 = Complex.new().init(-1,0)
+var complex1oversqrt2 = Complex.new().init(1/sqrt(2),0)
+var complexNegative1oversqrt2 = Complex.new().init(-1/sqrt(2),0)
+
+
 
 
 func _init():
@@ -21,6 +34,13 @@ func _init():
 	maxCompletedLevelID = MAX_COMPLETED_LEVEL_ID_INI_VALUE
 	levelListScroll = LEVEL_LIST_SCROLL_INI_VALUE
 	currentLevelID = CURRENT_LEVEL_ID_INI_VALUE
+	
+	addLevel([[complex0, complex1]],[[complex1, complex0]])
+
+func addLevel(initialStateMatrix: Array, goalStateMatrix: Array)->void:
+	initialStateMatrices.append(initialStateMatrix)
+	goalStateMatrices.append(goalStateMatrix)
+
 
 func setCompleted(auxCompleted: bool)->void:
 	completed = auxCompleted
@@ -45,6 +65,17 @@ func setCurrentLevelID(levelID: int)->void:
 
 func getCurrentLevelID()->int:
 	return currentLevelID
+
+# Pre: 0 <= levelID < initialStateMatrices.size()
+func obtainInitialStateMatrix(levelID: int)->Array:
+	return initialStateMatrices[levelID]
+
+# Pre: 0 <= levelID < initialStateMatrices.size()
+func obtainGoalStateMatrix(levelID: int)->Array:
+	return goalStateMatrices[levelID]
+
+func getLevelCount()->int:
+	return initialStateMatrices.size()
 
 
 func serialize()->Dictionary:

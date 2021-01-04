@@ -13,5 +13,5 @@ func updateQbitSystem(matrix:Array)->void:
 	.updateQbitSystem(matrix)
 	
 	qbitSystemLabel.text += "\n\n"
-	qbitSystemLabel.text += str(matrix[1][0].getReal()) + " + " + str(matrix[1][0].getImaginary()) + " i"
-	qbitSystemLabel.text += "   " + str(matrix[1][1].getReal()) + " + " + str(matrix[1][1].getImaginary()) + " i"
+	qbitSystemLabel.text = "%2.1f + %2.1f" % [matrix[1][0].getReal(), matrix[1][0].getImaginary()] + " i" 
+	qbitSystemLabel.text += "\n\n" + "%2.1f + %2.1f" % [matrix[1][1].getReal(), matrix[1][1].getImaginary()] + " i"
