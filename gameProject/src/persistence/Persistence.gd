@@ -76,7 +76,14 @@ func saveCurrentLevelID(levelID:int)->void:
 func loadCurrentLevelID()->int:
 	return gameData.getCurrentLevelID()
 
+func loadInitialStateMatrix(levelID: int)->Array:
+	return gameData.obtainInitialStateMatrix(levelID)
 
+func loadGoalStateMatrix(levelID: int)->Array:
+	return gameData.obtainGoalStateMatrix(levelID)
+
+func loadLevelCount()->int:
+	return gameData.getLevelCount()
 
 func save_in_file():
 	var save_game:File = File.new()

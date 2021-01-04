@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/user_interface/statesUI/StateInGameUI.gd" type="Script" id=1]
 [ext_resource path="res://src/user_interface/Background.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/user_interface/statesUI/StateUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/user_interface/BackBt.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/user_interface/TitleBannerInGame.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/gameplay/gates/GatePauliY.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/gameplay/gates/GatePauliX.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/gameplay/gates/GateHadamard.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/gameplay/gates/GatePauliZ.tscn" type="PackedScene" id=9]
 
 [node name="StateInGameUI" instance=ExtResource( 3 )]
 script = ExtResource( 1 )
@@ -18,4 +22,36 @@ margin_left = 49.0
 margin_top = 17.0
 margin_right = 194.0
 margin_bottom = 143.0
+
+[node name="GatesHBoxContainer" type="HBoxContainer" parent="." index="3"]
+margin_left = 38.0
+margin_top = 883.0
+margin_right = 1158.0
+margin_bottom = 1037.0
+mouse_filter = 2
+custom_constants/separation = 75
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GatePauliX" parent="GatesHBoxContainer" index="0" instance=ExtResource( 7 )]
+margin_left = 131.0
+margin_right = 289.0
+margin_bottom = 154.0
+
+[node name="GatePauliY" parent="GatesHBoxContainer" index="1" instance=ExtResource( 6 )]
+margin_left = 364.0
+margin_right = 522.0
+margin_bottom = 154.0
+
+[node name="GatePauliZ" parent="GatesHBoxContainer" index="2" instance=ExtResource( 9 )]
+margin_left = 597.0
+margin_right = 755.0
+margin_bottom = 154.0
+
+[node name="GateHadamard" parent="GatesHBoxContainer" index="3" instance=ExtResource( 8 )]
+margin_left = 830.0
+margin_right = 988.0
+margin_bottom = 154.0
 [connection signal="pressed" from="BackBt" to="." method="backButtonPressed"]

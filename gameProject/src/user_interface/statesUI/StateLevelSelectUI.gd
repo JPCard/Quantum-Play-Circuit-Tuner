@@ -31,7 +31,7 @@ func init(prevUI: StateUI)->void:
 	var rowCount: int
 	# warning-ignore:integer_division
 	rowCount = 1 + (levelCount - 1) / COUNTRY_COUNT_X 
-	print(rowCount)
+	#print(rowCount)
 	# Importante: Esta division tiene que ser de enteros pues se debe truncar. Valido para cualquier country_count_x
 	
 	
@@ -60,8 +60,8 @@ func createLevelBtRow(rowNumber: int, levelBtInRow: int, maxUnlockedlevelID: int
 	var auxLevelBt: LevelBtType
 	var levelID: int
 	var unlocked: bool
-	print("entra aca")
-	print(vBoxContainer)
+	
+	#print(vBoxContainer)
 	for j in range(levelBtInRow):
 		
 		levelID = rowNumber*COUNTRY_COUNT_X + j

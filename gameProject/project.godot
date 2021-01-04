@@ -49,6 +49,7 @@ config/quit_on_go_back=false
 GameGlobals="*res://src/GameGlobals.gd"
 Persistence="*res://src/persistence/Persistence.gd"
 GameDataExpert="*res://src/GameDataExpert.gd"
+ComplexMatrixAlgebra="*res://src/gameplay/ComplexMatrixAlgebra.gd"
 
 [display]
 

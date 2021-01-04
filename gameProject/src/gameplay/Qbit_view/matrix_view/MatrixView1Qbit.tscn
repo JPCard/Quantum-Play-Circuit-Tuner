@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/art/InGameUI/matrixView/background.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
-size = 26
+size = 54
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
@@ -15,7 +15,7 @@ font_data = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="BackgroundSprite" type="Sprite" parent="."]
-scale = Vector2( 1.21609, 1.67887 )
+scale = Vector2( 1.21609, 1.40715 )
 texture = ExtResource( 4 )
 centered = false
 
@@ -33,13 +33,14 @@ flip_h = true
 
 [node name="QbitSystemLabel" type="Label" parent="."]
 margin_left = 15.0
-margin_top = 27.0
-margin_right = 288.0
-margin_bottom = 130.0
-rect_scale = Vector2( 1.2, 2.5 )
+margin_top = 25.0
+margin_right = 344.0
+margin_bottom = 285.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "0.5 + 0.5 i   0.5 + 0.5 i"
+text = "0.5 + 0.5 i
+
+0.5 + 0.5 i"
 align = 1
 valign = 1
 __meta__ = {

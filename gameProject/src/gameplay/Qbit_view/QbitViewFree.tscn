@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://QbitViewFree.gd" type="Script" id=1]
+[ext_resource path="res://src/gameplay/Qbit_view/QbitViewFree.gd" type="Script" id=1]
 [ext_resource path="res://src/gameplay/Qbit_view/sphere_view/Qbit_sphere_views/SphereView2Qbits.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/gameplay/Qbit_view/QbitView.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/gameplay/Qbit_view/matrix_view/MatrixView2Qbits.tscn" type="PackedScene" id=4]

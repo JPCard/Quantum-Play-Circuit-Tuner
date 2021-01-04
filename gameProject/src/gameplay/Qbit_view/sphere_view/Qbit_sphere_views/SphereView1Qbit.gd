@@ -16,6 +16,7 @@ func renderSpheres()->void:
 func moveToFirstGoalSphereLocation()->void:
 	blochSphere2D.moveToFirstGoalSphereLocation()
 
-
+# cambia el vector de estado del Qbit
+# corrige ejes Y y Z, ya que en godot estan invertidos
 func rotateStateArrow(rotX: float, rotY: float, rotZ: float)->void:
-	blochSphere2D.rotateStateArrow(rotX, rotY, rotZ)
+	blochSphere2D.rotateStateArrow(rotX, rotZ, rotY)
