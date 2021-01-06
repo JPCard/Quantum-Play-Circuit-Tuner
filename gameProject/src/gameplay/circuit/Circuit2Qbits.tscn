@@ -9,12 +9,12 @@
 margin_bottom = 437.0
 script = ExtResource( 4 )
 
-[node name="LineSprite2" type="Sprite" parent="." index="2"]
+[node name="LineSprite2" type="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
 centered = false
 offset = Vector2( 0, 328 )
 
-[node name="BackgrounSprite2" type="Sprite" parent="." index="3"]
+[node name="BackgrounSprite2" type="Sprite" parent="." index="1"]
 position = Vector2( 128, 218 )
 texture = ExtResource( 2 )
 centered = false

@@ -22,6 +22,7 @@ margin_right = 1903.0
 margin_bottom = 911.0
 
 [node name="PopupLevelCompleted" parent="." index="6" instance=ExtResource( 5 )]
+visible = false
 [connection signal="level_won" from="Circuit" to="." method="win"]
 [connection signal="qbit_state_changed" from="Circuit" to="." method="updateCurrentQbitViews"]
 [connection signal="tree_entered" from="Circuit" to="." method="_on_Circuit_tree_entered"]

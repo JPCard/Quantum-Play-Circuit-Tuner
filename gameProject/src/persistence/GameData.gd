@@ -38,6 +38,7 @@ func _init():
 	addLevel1Qbit(complex0, complex1, complex1, complex0)
 	addLevel1Qbit(complex1, complex0, complexNegative1, complex0)
 	addLevel1Qbit(complex0, complexNegative1, complex1, complex0)
+	addLevel2Qbits(complex0, complex0, complex0, complex1, complex1, complex0, complex0, complex0)
 
 
 # Pre: - la suma de las probabilidades de initialComplex0 y initialComplex1 debe ser 1

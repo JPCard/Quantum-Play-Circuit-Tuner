@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/user_interface/statesUI/StateInGameClassic2QbitsUI.gd" type="Script" id=1]
 [ext_resource path="res://src/user_interface/statesUI/StateInGameUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/gameplay/gates/GatecX.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/gameplay/circuit/Circuit2Qbits.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/gameplay/Qbit_view/QbitViewClassic2Qbits.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/user_interface/PopupLevelCompleted.tscn" type="PackedScene" id=6]
 
 [node name="StateInGameClassic2QbitsUI" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
@@ -45,5 +46,10 @@ margin_right = 914.0
 margin_left = 989.0
 margin_right = 1063.0
 margin_bottom = 154.0
+
+[node name="PopupLevelCompleted" parent="." index="6" instance=ExtResource( 6 )]
+visible = false
 [connection signal="level_won" from="Circuit2Qbits" to="." method="win"]
 [connection signal="qbit_state_changed" from="Circuit2Qbits" to="." method="updateCurrentQbitViews"]
+[connection signal="tree_entered" from="Circuit2Qbits" to="." method="_on_Circuit2Qbits_tree_entered"]
+[connection signal="next_level_bt_pressed" from="PopupLevelCompleted" to="." method="toNextLevel"]

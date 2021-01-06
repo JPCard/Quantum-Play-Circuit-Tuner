@@ -17,7 +17,7 @@ var gatesQbit1: Array = []
 var gatesQbit2: Array = []
 var mutexGates: Mutex
 
-
+var classicMode: bool setget setClassicMode, isClassicMode
 
 func _ready():
 	mutexGates = Mutex.new()
@@ -36,21 +36,37 @@ func _ready():
 	
 	createBlankColumn()
 
+func setClassicMode(cond: bool)->void:
+	classicMode = cond
+
+func isClassicMode()->bool:
+	return classicMode
+
+
 func createGateHolderColumn(index)->void:
 	var auxVBoxContainer = createVBoxContainer()
 	
 	# top gate holder
-	var auxGateHolder = GateHolderInstancer.instance()
-	auxVBoxContainer.call_deferred("add_child", auxGateHolder)
-	auxGateHolder.connect("no_gate", self, "removeGateQbit1", [index])
-	auxGateHolder.connect("new_gate_dropped", self, "addGateQbit1", [index])
+	var auxGateHolder1 = GateHolderInstancer.instance()
+	auxVBoxContainer.call_deferred("add_child", auxGateHolder1)
+	auxGateHolder1.connect("no_gate", self, "removeGateQbit1", [index])
+	auxGateHolder1.connect("new_gate_dropped", self, "addGateQbit1", [index])
+	auxGateHolder1.init(true)
 	
 	# bottom gate holder
-	auxGateHolder = GateHolderInstancer.instance()
-	auxVBoxContainer.call_deferred("add_child", auxGateHolder)
-	auxGateHolder.connect("no_gate", self, "removeGateQbit2", [index])
-	auxGateHolder.connect("new_gate_dropped", self, "addGateQbit2", [index])
+	var auxGateHolder2 = GateHolderInstancer.instance()
 	
+	
+	auxVBoxContainer.call_deferred("add_child", auxGateHolder2)
+	auxGateHolder2.connect("no_gate", self, "removeGateQbit2", [index])
+	auxGateHolder2.connect("new_gate_dropped", self, "addGateQbit2", [index])
+	auxGateHolder2.init(false)
+	
+	auxGateHolder1.connect("no_gate", auxGateHolder2, "reset")
+	auxGateHolder1.connect("new_gate_dropped", auxGateHolder2, "gateDrop")
+	
+	auxGateHolder2.connect("no_gate", auxGateHolder1, "reset")
+	auxGateHolder2.connect("new_gate_dropped", auxGateHolder1, "gateDrop")
 
 
 func createVBoxContainer()->VBoxContainer:
@@ -73,11 +89,14 @@ func addGateQbit1(gate, index)->void:
 	mutexGates.lock()
 	
 	
-	if(gate.getMatrix().size() == 1 || gatesQbit2[index] == null):
+	if(gatesQbit2[index] == null || gatesQbit2[index].getMatrix().size() == 2): 
+		# si el otro lugar esta vacio o tiene una compuerta de 1 qbit
 		gatesQbit1[index] = gate
 		calculateQbitState()
+		
+		print("agrega gate 1 con mat: ", gate.getMatrix())
 	
-	print("agrega gate 1 con mat: ", gate.getMatrix())
+	
 	
 	mutexGates.unlock()
 
@@ -95,11 +114,14 @@ func removeGateQbit1(index)->void:
 func addGateQbit2(gate, index)->void:
 	mutexGates.lock()
 	
-	if(gate.getMatrix().size() == 1 || gatesQbit1[index] == null):
+	if(gatesQbit1[index] == null || gatesQbit1[index].getMatrix().size() == 2):
+		# si el otro lugar esta vacio o tiene una compuerta de 1 qbit
 		gatesQbit2[index] = gate
 		calculateQbitState()
+		
+		print("agrega gate 2 con mat: ", gate.getMatrix())
 	
-	print("agrega gate 2 con mat: ", gate.getMatrix())
+	
 	
 	mutexGates.unlock()
 
@@ -120,6 +142,7 @@ func calculateQbitState()->void:
 	
 	var auxQbitSate : Array = initialQbitState
 	
+	# TODO revisar esto para gates de 1 y 2 qbits
 	for i in range(GATE_HOLDER_COUNT):
 		if(gatesQbit1[i] != null):
 			auxQbitSate = ComplexMatrixAlgebra.multiplyComplexMatrices(auxQbitSate, gatesQbit1[i].getMatrix())
@@ -130,15 +153,16 @@ func calculateQbitState()->void:
 	
 	emit_signal("qbit_state_changed", currentQbitState)
 	
-	var ok: bool = true
-	var i: int = 0
-	
-	while (ok && i < currentQbitState[0].size()):
-		ok = currentQbitState[0][i].equals(goalQbitState[0][i])
-		i += 1
-	
-	if(ok):
-		emit_signal("level_won")
+	if(isClassicMode()):
+		var ok: bool = true
+		var i: int = 0
+		
+		while (ok && i < currentQbitState[0].size()):
+			ok = currentQbitState[0][i].equals(goalQbitState[0][i])
+			i += 1
+		
+		if(ok):
+			emit_signal("level_won")
 	
 
 
@@ -150,3 +174,8 @@ func createBlankColumn()->void:
 	blankSpace.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 
+func resetGateHolders()->void:
+	for vBoxContainer in $ScrollContainer/HBoxContainer.get_children():
+		for gateHolder in vBoxContainer.get_children(): # hay varios gateHolder por columna
+			if(gateHolder.has_method("reset")): # solo se activa si es gateHolder
+				gateHolder.reset()
