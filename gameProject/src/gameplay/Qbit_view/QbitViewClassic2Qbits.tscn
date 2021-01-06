@@ -68,7 +68,7 @@ texture = ExtResource( 6 )
 margin_top = 208.0
 margin_bottom = 876.0
 
-[node name="CurrentMatrixViewsQbits" parent="Matrices" index="0" instance=ExtResource( 5 )]
+[node name="CurrentMatrixView2Qbits" parent="Matrices" index="0" instance=ExtResource( 5 )]
 position = Vector2( 60.2843, 48 )
 
 [node name="GoalMatrixView2Qbits" parent="Matrices" index="1" instance=ExtResource( 5 )]

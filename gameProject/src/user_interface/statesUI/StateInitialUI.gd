@@ -25,7 +25,7 @@ func updateCurrentLevel()->void:
 		if(currentLevel1Qbit):
 			inGameClassic1QbitUI.init(levelSelectUI, inGameClassic2QbitsUI, currentLevelID)
 		else:
-			inGameClassic2QbitsUI.init(levelSelectUI, currentLevelID)
+			inGameClassic2QbitsUI.init(levelSelectUI, inGameClassic1QbitUI, currentLevelID)
 	
 
 

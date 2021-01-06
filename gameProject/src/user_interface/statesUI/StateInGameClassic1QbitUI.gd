@@ -33,7 +33,7 @@ func init(auxPrevUI: StateUI, auxInGameClassic2QbitsUI: StateUI, auxLevelID: int
 
 func win()->void:
 	# mostrar un popup que te permita ir al siguiente nivel o volver al menu de seleccion de niveles
-	print("ganaste")
+	#print("ganaste")
 	
 	
 	

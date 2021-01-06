@@ -68,7 +68,7 @@ func removeGate(index)->void:
 # para limpiar las compuertas activas al momento de iniciar el nivel
 func resetGateHolders()->void:
 	for gateHolder in $ScrollContainer/HBoxContainer.get_children():
-		if(gateHolder.has_method("reset")):
+		if(gateHolder.has_method("reset")): # solo se activa si es gateHolder
 			gateHolder.reset()
 
 

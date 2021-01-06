@@ -133,7 +133,7 @@ func toInGameClassicUI(levelID: int):
 		inGameClassic1QbitUI.init(self, inGameClassic2QbitsUI, levelID)
 		get_parent().call_deferred("add_child",inGameClassic1QbitUI)
 	else:
-		inGameClassic2QbitsUI.init(self,levelID)
+		inGameClassic2QbitsUI.init(self, inGameClassic1QbitUI, levelID)
 		get_parent().call_deferred("add_child",inGameClassic2QbitsUI)
 	
 	get_parent().call_deferred("remove_child",self)
