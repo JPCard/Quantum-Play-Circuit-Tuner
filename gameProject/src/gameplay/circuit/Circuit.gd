@@ -65,6 +65,13 @@ func removeGate(index)->void:
 	mutexGates.unlock()
 
 
+# para limpiar las compuertas activas al momento de iniciar el nivel
+func resetGateHolders()->void:
+	for gateHolder in $ScrollContainer/HBoxContainer.get_children():
+		if(gateHolder.has_method("reset")):
+			gateHolder.reset()
+
+
 
 func calculateQbitState()->void:
 	#print(currentQbitState)

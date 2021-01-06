@@ -8,11 +8,13 @@ const BT_SEPARATION_X: int = 250
 const LevelBtType = preload("res://src/user_interface/LevelBt.gd")
 const LevelBtFactory = preload("res://src/user_interface/LevelBtFactory.gd")
 
-onready var inGameClassicUI = loadStateUI("StateInGameClassic1QbitUI")
+var inGameClassic1QbitUI: StateUI
+var inGameClassic2QbitsUI: StateUI
 
 var vBoxContainer: VBoxContainer 
 var initialUI: StateUI
 
+var levelBts: Array = []
 
 
 func _ready():
@@ -21,12 +23,16 @@ func _ready():
 	$TitleBanner.setTitle("Niveles")
 
 
-func init(prevUI: StateUI)->void:
+func init(prevUI: StateUI, auxInGameClassic1QbitUI: StateUI, auxInGameClassic2QbitsUI: StateUI)->void:
 	initialUI = prevUI
+	inGameClassic1QbitUI = auxInGameClassic1QbitUI
+	inGameClassic2QbitsUI = auxInGameClassic2QbitsUI
 	
 	vBoxContainer = $ScrollContainer/VBoxContainer
 	
 	var levelCount: int = GameDataExpert.obtainLevelCount()
+	
+	levelBts.resize(levelCount)
 	
 	var rowCount: int
 	# warning-ignore:integer_division
@@ -83,8 +89,26 @@ func createLevelBtRow(rowNumber: int, levelBtInRow: int, maxUnlockedlevelID: int
 		if unlocked:
 			auxLevelBt.connect("pressed", self, "toInGameClassicUI",[auxLevelBt.getLevelID()])
 		
+		levelBts[levelID] = auxLevelBt
 		
 		auxHBoxContainer.call_deferred("add_child",auxLevelBt)
+
+
+# Pre: solo llamar sobre botones que estaban lockeados
+func setLevelBtUnlocked(levelID: int)->void:
+	var levelBt: LevelBt = levelBts[levelID]
+	LevelBtFactory.setUnlockedTextures(levelBt)
+	levelBt.setUnlocked(true)
+	
+	# para que al tocar te lleve al proximo nivel
+	levelBt.connect("pressed", self, "toInGameClassicUI",[levelBt.getLevelID()])
+
+
+# Pre: solo llamar sobre botones que estaban unlocked
+func setLevelBtCompleted(levelID: int)->void:
+	var levelBt: LevelBt = levelBts[levelID]
+	LevelBtFactory.setCompletedTextures(levelBt)
+	levelBt.setCompleted(true)
 
 
 func createBlankRow()->void:
@@ -105,8 +129,13 @@ func createHBoxContainer()->HBoxContainer:
 
 
 func toInGameClassicUI(levelID: int):
-	inGameClassicUI.init(self,levelID)
-	get_parent().call_deferred("add_child",inGameClassicUI)
+	if(GameDataExpert.is1QbitLevel(levelID)):
+		inGameClassic1QbitUI.init(self, inGameClassic2QbitsUI, levelID)
+		get_parent().call_deferred("add_child",inGameClassic1QbitUI)
+	else:
+		inGameClassic2QbitsUI.init(self,levelID)
+		get_parent().call_deferred("add_child",inGameClassic2QbitsUI)
+	
 	get_parent().call_deferred("remove_child",self)
 
 func backButtonPressed()->void:

@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/art/InGameUI/popupLevelCompleted/background.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/InGameUI/popupLevelCompleted/levelSelectBtUnpressed.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/InGameUI/popupLevelCompleted/levelSelectBtPressed.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/InGameUI/popupLevelCompleted/NextLevelBtPressed.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/InGameUI/popupLevelCompleted/NextLevelBtUnpressed.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/Orkney/Orkney Bold.otf" type="DynamicFontData" id=6]
+[ext_resource path="res://src/user_interface/PopupLevelCompleted.gd" type="Script" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 94
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 6 )
+
+[node name="PopupLevelCompleted" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1946.0
+margin_bottom = 1092.0
+color = Color( 0, 0, 0, 0.929412 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundSprite" type="Sprite" parent="."]
+position = Vector2( 558.263, 215.632 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="TitleLabel" type="Label" parent="."]
+margin_left = 560.0
+margin_top = 255.0
+margin_right = 1322.0
+margin_bottom = 496.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0666667, 0.176471, 0.305882, 1 )
+text = "Nivel completado"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 555.0
+margin_top = 508.0
+margin_right = 1322.0
+margin_bottom = 760.0
+custom_constants/separation = 100
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelSelectBt" type="TextureButton" parent="HBoxContainer"]
+margin_left = 86.0
+margin_right = 333.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 247, 252 )
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextLevelBt" type="TextureButton" parent="HBoxContainer"]
+margin_left = 433.0
+margin_right = 680.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 247, 252 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="HBoxContainer/LevelSelectBt" to="." method="_on_LevelSelectBt_pressed"]
+[connection signal="pressed" from="HBoxContainer/NextLevelBt" to="." method="_on_NextLevelBt_pressed"]
