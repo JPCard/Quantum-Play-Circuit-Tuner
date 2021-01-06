@@ -35,11 +35,27 @@ func _init():
 	levelListScroll = LEVEL_LIST_SCROLL_INI_VALUE
 	currentLevelID = CURRENT_LEVEL_ID_INI_VALUE
 	
-	addLevel([[complex0, complex1]],[[complex1, complex0]])
+	addLevel1Qbit(complex0, complex1, complex1, complex0)
+	addLevel1Qbit(complex1, complex0, complexNegative1, complex0)
+	addLevel1Qbit(complex0, complexNegative1, complex1, complex0)
 
-func addLevel(initialStateMatrix: Array, goalStateMatrix: Array)->void:
-	initialStateMatrices.append(initialStateMatrix)
-	goalStateMatrices.append(goalStateMatrix)
+
+# Pre: - la suma de las probabilidades de initialComplex0 y initialComplex1 debe ser 1
+#      - la suma de las probabilidades de goalComplex0 y goalComplex1 debe ser 1
+func addLevel1Qbit(initialComplex0: Complex, initialComplex1: Complex, goalComplex0: Complex, goalComplex1: Complex)->void:
+	
+	initialStateMatrices.append([[initialComplex0, initialComplex1]])
+	goalStateMatrices.append([[goalComplex0, goalComplex1]])
+
+
+# Pre: - la suma de las probabilidades de initialComplex00, initialComplex01, initialComplex10 y initialComplex11 debe ser 1
+#      - la suma de las probabilidades de goalComplex00, goalComplex01, goalComplex10 y goalComplex11 debe ser 1
+func addLevel2Qbits(initialComplex00: Complex, initialComplex01: Complex, initialComplex10: Complex, initialComplex11: Complex, 
+					goalComplex00: Complex, goalComplex01: Complex, goalComplex10: Complex, goalComplex11: Complex)->void:
+	
+	initialStateMatrices.append([[initialComplex00, initialComplex01, initialComplex10, initialComplex11]])
+	goalStateMatrices.append([[goalComplex00, goalComplex01, goalComplex10, goalComplex11]])
+
 
 
 func setCompleted(auxCompleted: bool)->void:

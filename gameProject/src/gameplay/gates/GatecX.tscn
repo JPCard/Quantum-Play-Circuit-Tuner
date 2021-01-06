@@ -5,9 +5,10 @@
 [ext_resource path="res://src/gameplay/gates/GatecX.gd" type="Script" id=3]
 
 [node name="GatecX" instance=ExtResource( 1 )]
-margin_right = 136.0
-margin_bottom = 255.0
+margin_right = 75.0
+rect_min_size = Vector2( 74, 150 )
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
+scale = Vector2( 0.456012, 0.437276 )
 texture = ExtResource( 2 )

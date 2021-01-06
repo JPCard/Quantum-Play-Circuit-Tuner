@@ -1,14 +1,48 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/user_interface/statesUI/StateInGameUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/user_interface/statesUI/StateInGameFreeUI.gd" type="Script" id=2]
 [ext_resource path="res://src/gameplay/Qbit_view/QbitViewFree.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/gameplay/circuit/Circuit2Qbits.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/gameplay/gates/GatecX.tscn" type="PackedScene" id=5]
 
 [node name="StateInGameFreeUI" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="QbitViewFree" parent="." index="3" instance=ExtResource( 3 )]
-margin_left = 1070.0
+[node name="Circuit2Qbits" parent="." index="3" instance=ExtResource( 4 )]
+margin_left = 169.0
+margin_top = 376.0
+margin_right = 1604.0
+margin_bottom = 813.0
+
+[node name="QbitViewFree" parent="." index="4" instance=ExtResource( 3 )]
+margin_left = 1154.0
 margin_top = 159.0
-margin_right = 1917.0
+margin_right = 1927.0
 margin_bottom = 1078.0
+
+[node name="GatesHBoxContainer" parent="." index="5"]
+margin_left = 174.0
+margin_right = 1305.0
+
+[node name="GatePauliX" parent="GatesHBoxContainer" index="0"]
+margin_left = 62.0
+margin_right = 220.0
+
+[node name="GatePauliY" parent="GatesHBoxContainer" index="1"]
+margin_left = 295.0
+margin_right = 453.0
+
+[node name="GatePauliZ" parent="GatesHBoxContainer" index="2"]
+margin_left = 528.0
+margin_right = 686.0
+
+[node name="GateHadamard" parent="GatesHBoxContainer" index="3"]
+margin_left = 761.0
+margin_right = 919.0
+
+[node name="GatecX" parent="GatesHBoxContainer" index="4" instance=ExtResource( 5 )]
+margin_left = 994.0
+margin_right = 1068.0
+margin_bottom = 154.0
+[connection signal="qbit_state_changed" from="Circuit2Qbits" to="." method="updateCurrentQbitViews"]

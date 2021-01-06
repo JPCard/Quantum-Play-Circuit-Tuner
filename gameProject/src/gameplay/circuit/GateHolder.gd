@@ -40,10 +40,21 @@ func get_drag_data(pos):
 		
 		var auxGate = gate
 		
-		gate = null  # pierde su gate porque se va a arrastrar
-		setSpriteTexture(GATE_HOLDER_TEXTURE)
-		mouse_filter = Control.MOUSE_FILTER_PASS
+		reset()
 		
-		emit_signal("no_gate")
+		
 		
 		return auxGate
+
+
+func reset()->void:
+	gate = null  # pierde su gate porque se va a arrastrar
+	setSpriteTexture(GATE_HOLDER_TEXTURE)
+	mouse_filter = Control.MOUSE_FILTER_PASS
+	
+	emit_signal("no_gate")
+
+
+
+
+

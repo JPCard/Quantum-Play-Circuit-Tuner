@@ -30,19 +30,31 @@ static func _createLevelBt(levelBtTypes, levelID:int)->LevelBt:
 	
 	match (levelBtTypes):
 		LEVEL_BT_TYPES.UNLOCKED:
-			levelBt.texture_normal = LVL_BT_UNLOCKED_NORMAL_TEXTURE
-			levelBt.texture_pressed = LVL_BT_UNLOCKED_PRESSED_TEXTURE
+			setUnlockedTextures(levelBt)
+			levelBt.setUnlocked(true)
+			levelBt.setCompleted(false)
+			
 		LEVEL_BT_TYPES.COMPLETED: 
-			levelBt.texture_normal = LVL_BT_COMPLETED_NORMAL_TEXTURE
-			levelBt.texture_pressed = LVL_BT_COMPLETED_PRESSED_TEXTURE
-		
+			setCompletedTextures(levelBt)
+			levelBt.setUnlocked(true)
+			levelBt.setCompleted(true)
+			
 		LEVEL_BT_TYPES.LOCKED: 
 			levelBt.texture_normal = LVL_BT_LOCKED_NORMAL_TEXTURE
 			#levelBt.disabled = true
-	
+			levelBt.setUnlocked(false)
+			levelBt.setCompleted(false)
 	
 	return levelBt
 
+
+static func setUnlockedTextures(levelBt):
+	levelBt.texture_normal = LVL_BT_UNLOCKED_NORMAL_TEXTURE
+	levelBt.texture_pressed = LVL_BT_UNLOCKED_PRESSED_TEXTURE
+
+static func setCompletedTextures(levelBt):
+	levelBt.texture_normal = LVL_BT_COMPLETED_NORMAL_TEXTURE
+	levelBt.texture_pressed = LVL_BT_COMPLETED_PRESSED_TEXTURE
 
 
 static func createUnlockedLevelBt(levelID:int):

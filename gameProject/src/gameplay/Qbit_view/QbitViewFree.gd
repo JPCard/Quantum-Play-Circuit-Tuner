@@ -14,14 +14,18 @@ func _ready():
 
 
 func rotateFirstCurrentQbitStateArrow(rotX: float, rotY: float, rotZ: float)->void:
-	sphereView2Qbits.rotateFirstQbitStateArrow(rotX, rotY, rotZ)
+	$Spheres/SphereView2Qbits.rotateFirstQbitStateArrow(rotX, rotY, rotZ)
 
 func rotateSecondCurrentQbitStateArrow(rotX: float, rotY: float, rotZ: float)->void:
-	sphereView2Qbits.rotateSecondQbitStateArrow(rotX, rotY, rotZ)
+	$Spheres/SphereView2Qbits.rotateSecondQbitStateArrow(rotX, rotY, rotZ)
 
 
 func updateCurrentQbitSystem(matrix:Array)->void:
-	matrixView2Qbits.updateQbitSystem(matrix)
+	$Matrices/MatrixView2Qbits.updateQbitSystem(matrix)
+	
+	#TODO pasar de matriz de estado a rotaciones
+	#rotateFirstCurrentQbitStateArrow(rotX, rotY, rotZ)
+	#rotateSecondCurrentQbitStateArrow(rotX, rotY, rotZ)
 
 
 func rotateSpheresHorizontally(rotY: float)->void:

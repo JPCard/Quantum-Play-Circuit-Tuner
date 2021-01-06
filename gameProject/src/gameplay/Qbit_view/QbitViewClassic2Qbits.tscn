@@ -16,9 +16,9 @@ margin_bottom = 877.0
 script = ExtResource( 2 )
 
 [node name="CurrentLabel" type="Label" parent="." index="1"]
-margin_left = 5.657
+margin_left = 29.657
 margin_top = 138.593
-margin_right = 430.657
+margin_right = 454.657
 margin_bottom = 299.593
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.0666667, 0.176471, 0.305882, 1 )
@@ -29,9 +29,9 @@ __meta__ = {
 }
 
 [node name="GoalLabel" type="Label" parent="." index="2"]
-margin_left = 437.657
+margin_left = 445.657
 margin_top = 138.593
-margin_right = 862.657
+margin_right = 870.657
 margin_bottom = 299.593
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.0666667, 0.176471, 0.305882, 1 )
@@ -42,20 +42,20 @@ __meta__ = {
 }
 
 [node name="Spheres" parent="." index="3"]
-margin_top = 261.0
-margin_bottom = 893.0
+margin_top = 213.0
+margin_bottom = 845.0
 
 [node name="CurrentSphereView2Qbits" parent="Spheres" index="0" instance=ExtResource( 3 )]
-margin_left = 87.6815
+margin_left = 111.682
 margin_top = 43.245
-margin_right = 347.682
+margin_right = 371.682
 margin_bottom = 596.245
 mouse_filter = 2
 
 [node name="GoalSphereView2Qbits" parent="Spheres" index="1" instance=ExtResource( 3 )]
-margin_left = 519.681
+margin_left = 543.681
 margin_top = 43.245
-margin_right = 779.681
+margin_right = 803.681
 margin_bottom = 596.245
 mouse_filter = 2
 
@@ -65,12 +65,11 @@ scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 
 [node name="Matrices" parent="." index="4"]
-visible = false
-margin_top = 256.0
-margin_bottom = 924.0
+margin_top = 208.0
+margin_bottom = 876.0
 
 [node name="CurrentMatrixViewsQbits" parent="Matrices" index="0" instance=ExtResource( 5 )]
-position = Vector2( 28.2843, 48 )
+position = Vector2( 60.2843, 48 )
 
 [node name="GoalMatrixView2Qbits" parent="Matrices" index="1" instance=ExtResource( 5 )]
-position = Vector2( 452.284, 48 )
+position = Vector2( 484.284, 48 )

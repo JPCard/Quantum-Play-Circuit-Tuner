@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/gameplay/circuit/Circuit.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/InGameUI/circuit/circuitBackground.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/InGameUI/circuit/circuitLine.png" type="Texture" id=3]
+[ext_resource path="res://src/gameplay/circuit/Circuit2Qbits.gd" type="Script" id=4]
+
+[node name="Circuit2Qbits" instance=ExtResource( 1 )]
+margin_bottom = 437.0
+script = ExtResource( 4 )
+
+[node name="LineSprite2" type="Sprite" parent="." index="2"]
+texture = ExtResource( 3 )
+centered = false
+offset = Vector2( 0, 328 )
+
+[node name="BackgrounSprite2" type="Sprite" parent="." index="3"]
+position = Vector2( 128, 218 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="ScrollContainer" parent="." index="4"]
+margin_bottom = 438.0

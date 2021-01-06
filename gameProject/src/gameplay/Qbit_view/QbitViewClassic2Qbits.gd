@@ -21,25 +21,36 @@ func _ready():
 
 
 func rotateFirstCurrentQbitStateArrow(rotX: float, rotY: float, rotZ: float)->void:
-	currentSphereView2Qbits.rotateFirstQbitStateArrow(rotX, rotY, rotZ)
+	$Spheres/CurrentSphereView2Qbits.rotateFirstQbitStateArrow(rotX, rotY, rotZ)
 
 func rotateSecondCurrentQbitStateArrow(rotX: float, rotY: float, rotZ: float)->void:
-	currentSphereView2Qbits.rotateSecondQbitStateArrow(rotX, rotY, rotZ)
+	$Spheres/CurrentSphereView2Qbits.rotateSecondQbitStateArrow(rotX, rotY, rotZ)
 
 
 func rotateFirstGoalQbitStateArrow(rotX: float, rotY: float, rotZ: float)->void:
-	goalSphereView2Qbits.rotateFirstQbitStateArrow(rotX, rotY, rotZ)
+	$Spheres/GoalSphereView2Qbits.rotateFirstQbitStateArrow(rotX, rotY, rotZ)
 
 func rotateSecondGoalQbitStateArrow(rotX: float, rotY: float, rotZ: float)->void:
-	goalSphereView2Qbits.rotateSecondQbitStateArrow(rotX, rotY, rotZ)
+	$Spheres/GoalSphereView2Qbits.rotateSecondQbitStateArrow(rotX, rotY, rotZ)
 
 
 
 func updateCurrentQbitSystem(matrix:Array)->void:
-	currentMatrixView2Qbits.updateQbitSystem(matrix)
+	$Matrices/CurrentMatrixView2Qbits.updateQbitSystem(matrix)
+	
+	#TODO pasar de matriz de estado a rotaciones
+	#rotateFirstCurrentQbitStateArrow(rotX,rotY,rotZ)
+	#rotateSecondCurrentQbitStateArrow(rotX,rotY,rotZ)
 
 func updateGoalQbitSystem(matrix:Array)->void:
-	goalMatrixView2Qbits.updateQbitSystem(matrix)
+	$Matrices/GoalMatrixView2Qbits.updateQbitSystem(matrix)
+	
+	#TODO pasar de matriz de estado a rotaciones
+	#rotateFirstGoalQbitStateArrow(rotX,rotY,rotZ)
+	#rotateSecondGoalQbitStateArrow(rotX,rotY,rotZ)
+
+
+
 
 func rotateSpheresHorizontally(rotY: float)->void:
 	currentSphereView2Qbits.rotateSpheresHorizontally(rotY)
@@ -48,3 +59,9 @@ func rotateSpheresHorizontally(rotY: float)->void:
 func renderSpheres()->void:
 	currentSphereView2Qbits.renderSpheres()
 	goalSphereView2Qbits.renderSpheres()
+
+
+
+
+
+
