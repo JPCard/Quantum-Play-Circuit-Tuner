@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/gameplay/Qbit_view/sphere_view/Qbit_sphere_views/SphereView1Qbit.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/gameplay/Qbit_view/sphere_view/BlochSphere2D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/gameplay/Qbit_view/sphere_view/Qbit_sphere_views/SphereView2Qbits.gd" type="Script" id=3]
+
+[node name="SphereView2Qbits" instance=ExtResource( 1 )]
+margin_bottom = 553.0
+script = ExtResource( 3 )
+
+[node name="BlochSphere2D_2" parent="." index="1" instance=ExtResource( 2 )]
+position = Vector2( 0, 224 )
+
+[node name="RotateSprite" parent="." index="2"]
+position = Vector2( 72, 456 )

@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=4 format=2]
+
+[ext_resource path="res://assets/art/InGameUI/circuit/scrollBar.png" type="Texture" id=1]
+[ext_resource path="res://src/gameplay/circuit/ScrollPadStyleBoxTexture.tres" type="StyleBox" id=2]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 935, 37 )
+
+[resource]
+HScrollBar/icons/decrement = null
+HScrollBar/icons/decrement_highlight = null
+HScrollBar/icons/increment = null
+HScrollBar/icons/increment_highlight = null
+HScrollBar/styles/grabber = ExtResource( 2 )
+HScrollBar/styles/grabber_highlight = ExtResource( 2 )
+HScrollBar/styles/grabber_pressed = ExtResource( 2 )
+HScrollBar/styles/scroll = SubResource( 1 )
+HScrollBar/styles/scroll_focus = null

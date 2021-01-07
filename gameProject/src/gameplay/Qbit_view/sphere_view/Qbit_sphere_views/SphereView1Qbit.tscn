@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/art/InGameUI/sphereView/rotateArrow.png" type="Texture" id=1]
+[ext_resource path="res://src/gameplay/Qbit_view/sphere_view/Qbit_sphere_views/SphereView1Qbit.gd" type="Script" id=2]
+[ext_resource path="res://src/gameplay/Qbit_view/sphere_view/BlochSphere2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/gameplay/Qbit_view/sphere_view/SphereView.tscn" type="PackedScene" id=4]
+
+[node name="SphereView1Qbit" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 260.0
+margin_bottom = 304.0
+script = ExtResource( 2 )
+
+[node name="BlochSphere2D" parent="." index="0" instance=ExtResource( 3 )]
+
+[node name="RotateSprite" type="Sprite" parent="." index="1"]
+position = Vector2( 76, 240 )
+texture = ExtResource( 1 )
+centered = false

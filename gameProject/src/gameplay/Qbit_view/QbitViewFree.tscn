@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/gameplay/Qbit_view/QbitViewFree.gd" type="Script" id=1]
+[ext_resource path="res://src/gameplay/Qbit_view/sphere_view/Qbit_sphere_views/SphereView2Qbits.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/gameplay/Qbit_view/QbitView.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/gameplay/Qbit_view/matrix_view/MatrixView2Qbits.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/art/InGameUI/XYZcoords.png" type="Texture" id=5]
+
+[node name="QbitViewFree" instance=ExtResource( 3 )]
+margin_bottom = 929.0
+script = ExtResource( 1 )
+
+[node name="Spheres" parent="." index="1"]
+margin_bottom = 880.0
+
+[node name="SphereView2Qbits" parent="Spheres" index="0" instance=ExtResource( 2 )]
+margin_left = 266.699
+margin_top = 24.909
+margin_right = 526.699
+margin_bottom = 577.909
+rect_scale = Vector2( 1.2, 1.2 )
+mouse_filter = 2
+
+[node name="XYZCoordsSprite" type="Sprite" parent="Spheres" index="1"]
+position = Vector2( 410, 740 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 5 )
+
+[node name="Matrices" parent="." index="2"]
+visible = false
+
+[node name="MatrixView2Qbits" parent="Matrices" index="0" instance=ExtResource( 4 )]
+position = Vector2( 229.75, 75.797 )

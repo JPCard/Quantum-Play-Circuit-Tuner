@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/art/InGameUI/QbitViewSphereSelected.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/InGameUI/QbitViewBtMatrixSelected.png" type="Texture" id=2]
+[ext_resource path="res://src/user_interface/QbitViewBt.gd" type="Script" id=3]
+
+[node name="QbitViewBt" type="Control"]
+margin_right = 484.0
+margin_bottom = 79.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MatrixSelectBt" type="Button" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 239.0
+margin_bottom = 78.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MatrixSelectedSprite" type="Sprite" parent="MatrixSelectBt"]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="SphereSelectBt" type="Button" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 239.0
+margin_right = 480.0
+margin_bottom = 78.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SphereSelectedSprite" type="Sprite" parent="SphereSelectBt"]
+position = Vector2( -240, 0 )
+texture = ExtResource( 1 )
+centered = false
+[connection signal="pressed" from="MatrixSelectBt" to="." method="selectMatrixView"]
+[connection signal="pressed" from="SphereSelectBt" to="." method="selectSphereView"]

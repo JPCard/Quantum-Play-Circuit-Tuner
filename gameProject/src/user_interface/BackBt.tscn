@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/art/LevelSelectUI/backBt.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/LevelSelectUI/backBt_Pressed.png" type="Texture" id=2]
+
+[node name="BackBt" type="TextureButton"]
+margin_left = 48.9795
+margin_top = 32.4388
+margin_right = 253.979
+margin_bottom = 211.439
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
