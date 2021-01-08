@@ -33,6 +33,9 @@ func get_drag_data(pos):
 	
 	return self
 
+func is2QbitGate()->bool:
+	return getMatrix().size() == 4
+
 
 func getMatrix()->Array:
 	return matrix

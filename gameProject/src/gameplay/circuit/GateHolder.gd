@@ -2,6 +2,10 @@ extends Control
 
 signal new_gate_dropped
 signal no_gate
+signal new_gate_2_qbits_dropped
+signal prev_2_qbits_no_gate
+signal new_gate_1_qbit_dropped
+#signal prev_1_qbit_no_gate
 
 const GATE_HOLDER_TEXTURE = preload("res://assets/art/InGameUI/circuit/gateHolder.png")
 
@@ -35,6 +39,11 @@ func gateDrop(auxGate)->void:
 		setGate(auxGate)
 		emit_signal("new_gate_dropped", gate) # dispara metodos para cambiar el estado de las vistas de los qbits
 		$DragZone.mouse_filter = Control.MOUSE_FILTER_STOP
+		
+		if(auxGate.is2QbitGate()): # si es gate para 2 qbits
+			emit_signal("new_gate_2_qbits_dropped", gate)
+		else:
+			emit_signal("new_gate_1_qbit_dropped")
 		
 		setSpriteTexture(gate.getTexture())
 		
@@ -70,7 +79,14 @@ func createDragData(pos):
 func reset()->void:
 	
 	if(getGate() != null):
+		var prev_gate_2_qbits: bool = getGate().is2QbitGate()
 		setGate(null) # pierde su gate porque se va a arrastrar
+		
+		if(prev_gate_2_qbits): # si es gate para 2 qbits
+			emit_signal("prev_2_qbits_no_gate")
+		#else:
+		#	emit_signal("prev_1_qbit_no_gate")
+		
 		setSpriteTexture(GATE_HOLDER_TEXTURE)
 		$Sprite.show()
 		$DragZone.mouse_filter = Control.MOUSE_FILTER_PASS
@@ -78,6 +94,8 @@ func reset()->void:
 		emit_signal("no_gate")
 
 
-
+func neighborDropped1QbitGate()->void:
+	if(getGate() != null && getGate().is2QbitGate()):
+		reset()
 
 
