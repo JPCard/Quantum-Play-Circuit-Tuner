@@ -62,11 +62,14 @@ func createGateHolderColumn(index)->void:
 	auxGateHolder2.connect("new_gate_dropped", self, "addGateQbit2", [index])
 	auxGateHolder2.init(false)
 	
-	auxGateHolder1.connect("no_gate", auxGateHolder2, "reset")
-	auxGateHolder1.connect("new_gate_dropped", auxGateHolder2, "gateDrop")
+	auxGateHolder1.connect("prev_2_qbits_no_gate", auxGateHolder2, "reset")
+	auxGateHolder1.connect("new_gate_2_qbits_dropped", auxGateHolder2, "gateDrop")
+	auxGateHolder1.connect("new_gate_1_qbit_dropped", auxGateHolder2, "neighborDropped1QbitGate")
 	
-	auxGateHolder2.connect("no_gate", auxGateHolder1, "reset")
-	auxGateHolder2.connect("new_gate_dropped", auxGateHolder1, "gateDrop")
+	
+	auxGateHolder2.connect("prev_2_qbits_no_gate", auxGateHolder1, "reset")
+	auxGateHolder2.connect("new_gate_2_qbits_dropped", auxGateHolder1, "gateDrop")
+	auxGateHolder2.connect("new_gate_1_qbit_dropped", auxGateHolder1, "neighborDropped1QbitGate")
 
 
 func createVBoxContainer()->VBoxContainer:
@@ -89,7 +92,7 @@ func addGateQbit1(gate, index)->void:
 	mutexGates.lock()
 	
 	
-	if(gatesQbit2[index] == null || gatesQbit2[index].getMatrix().size() == 2): 
+	if(gatesQbit2[index] == null || !gatesQbit2[index].is2QbitGate()): 
 		# si el otro lugar esta vacio o tiene una compuerta de 1 qbit
 		gatesQbit1[index] = gate
 		calculateQbitState()
@@ -111,10 +114,11 @@ func removeGateQbit1(index)->void:
 	
 	mutexGates.unlock()
 
+
 func addGateQbit2(gate, index)->void:
 	mutexGates.lock()
 	
-	if(gatesQbit1[index] == null || gatesQbit1[index].getMatrix().size() == 2):
+	if(gatesQbit1[index] == null || !gatesQbit1[index].is2QbitGate()):
 		# si el otro lugar esta vacio o tiene una compuerta de 1 qbit
 		gatesQbit2[index] = gate
 		calculateQbitState()
@@ -143,6 +147,7 @@ func calculateQbitState()->void:
 	var auxQbitSate : Array = initialQbitState
 	
 	# TODO revisar esto para gates de 1 y 2 qbits
+	# tener en cuenta que las compuertas para 2 qbits se agregan en gatesQbit1 y gatesQbit2
 	for i in range(GATE_HOLDER_COUNT):
 		if(gatesQbit1[i] != null):
 			auxQbitSate = ComplexMatrixAlgebra.multiplyComplexMatrices(auxQbitSate, gatesQbit1[i].getMatrix())
