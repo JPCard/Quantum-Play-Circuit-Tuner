@@ -1,4 +1,4 @@
-extends "res://src/gameplay/Qbit_view/sphere_view/SphereView.gd"
+extends "res://src/gameplay/Qbit_view/sphere_view/Qbit_sphere_views/SphereView.gd"
 
 onready var blochSphere2D : BlochSphere2D = $BlochSphere2D 
 
@@ -19,4 +19,4 @@ func moveToFirstGoalSphereLocation()->void:
 # cambia el vector de estado del Qbit
 # corrige ejes Y y Z, ya que en godot estan invertidos
 func rotateStateArrow(rotX: float, rotY: float, rotZ: float)->void:
-	blochSphere2D.rotateStateArrow(rotX, rotZ, rotY)
+	$BlochSphere2D.rotateStateArrow(rotX, rotZ, rotY)
