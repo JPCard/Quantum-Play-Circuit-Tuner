@@ -23,7 +23,7 @@ func rotateBlochSphereHorizontally(rotY: float)->void:
 	blochSphere.rotateBlochSphereHorizontally(rotY)
 
 func rotateStateArrow(rotX: float, rotY: float, rotZ: float)->void:
-	blochSphere.rotateStateArrow(rotX, rotY, rotZ)
+	$Viewport/BlochSphere.rotateStateArrow(rotX, rotY, rotZ)
 
 func renderSphere()->void:
 	var texture = viewport.get_texture()

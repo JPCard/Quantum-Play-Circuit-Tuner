@@ -74,8 +74,12 @@ func equals(complex)->bool:
 	
 
 
+# retorna el argumento de este numero complejo
+# Pre: no permite el complejo nulo como parametro
+func argument()->float:
+	return atan2(getImaginary(), getReal())
 
-
-
+func absoluteValue()->float:
+	return sqrt(pow(getReal(), 2) + pow(getImaginary(), 2))
 
 
