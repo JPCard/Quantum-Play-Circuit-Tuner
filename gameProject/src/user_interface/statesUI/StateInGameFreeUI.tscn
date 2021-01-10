@@ -46,3 +46,4 @@ margin_left = 994.0
 margin_right = 1068.0
 margin_bottom = 154.0
 [connection signal="qbit_state_changed" from="Circuit2Qbits" to="." method="updateCurrentQbitViews"]
+[connection signal="tree_entered" from="Circuit2Qbits" to="." method="_on_Circuit2Qbits_tree_entered"]

@@ -35,19 +35,26 @@ func rotateSecondGoalQbitStateArrow(rotX: float, rotY: float, rotZ: float)->void
 
 
 
-func updateCurrentQbitSystem(matrix:Array)->void:
-	$Matrices/CurrentMatrixView2Qbits.updateQbitSystem(matrix)
+func updateCurrentQbitSystem(qbitStateMatrix1:Array, qbitStateMatrix2:Array)->void:
+	$Matrices/CurrentMatrixView2Qbits.updateQbitSystem(TwoQbitStateFrom1QbitStates(qbitStateMatrix1, qbitStateMatrix2))
 	
-	#TODO pasar de matriz de estado a rotaciones
-	#rotateFirstCurrentQbitStateArrow(rotX,rotY,rotZ)
-	#rotateSecondCurrentQbitStateArrow(rotX,rotY,rotZ)
+	var blochAngles: Array = stateToBlochSphereRotation(qbitStateMatrix1)
+	rotateFirstCurrentQbitStateArrow(0,-blochAngles[0],blochAngles[1])
+	
+	blochAngles = stateToBlochSphereRotation(qbitStateMatrix2)
+	rotateSecondCurrentQbitStateArrow(0,-blochAngles[0],blochAngles[1])
+	
 
-func updateGoalQbitSystem(matrix:Array)->void:
-	$Matrices/GoalMatrixView2Qbits.updateQbitSystem(matrix)
+
+func updateGoalQbitSystem(qbitStateMatrix1:Array, qbitStateMatrix2:Array)->void:
+	$Matrices/GoalMatrixView2Qbits.updateQbitSystem(TwoQbitStateFrom1QbitStates(qbitStateMatrix1, qbitStateMatrix2)) 
 	
-	#TODO pasar de matriz de estado a rotaciones
-	#rotateFirstGoalQbitStateArrow(rotX,rotY,rotZ)
-	#rotateSecondGoalQbitStateArrow(rotX,rotY,rotZ)
+	var blochAngles: Array = stateToBlochSphereRotation(qbitStateMatrix1)
+	rotateFirstGoalQbitStateArrow(0,-blochAngles[0],blochAngles[1])
+	
+	blochAngles = stateToBlochSphereRotation(qbitStateMatrix2)
+	rotateSecondGoalQbitStateArrow(0,-blochAngles[0],blochAngles[1])
+	
 
 
 

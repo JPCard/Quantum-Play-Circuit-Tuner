@@ -1,6 +1,6 @@
 extends Control
 
-signal qbit_state_changed
+signal qbit_state_changed(currentQbitState1, currentQbitState1)
 signal level_won
 
 
@@ -10,9 +10,12 @@ const GateHolderInstancer = preload("res://src/gameplay/circuit/GateHolder.tscn"
 
 onready var hBoxContainer: HBoxContainer = $ScrollContainer/HBoxContainer
 
-var initialQbitState : Array = [[Complex.new().init(0,0), Complex.new().init(1,0)]]
-var goalQbitState : Array
-var currentQbitState : Array = [[Complex.new().init(0,0), Complex.new().init(1,0)]]
+var initialQbitState1 : Array = [[Complex.new().init(0,0), Complex.new().init(1,0)]]
+var initialQbitState2 : Array = [[Complex.new().init(0,0), Complex.new().init(1,0)]]
+var goalQbitState1 : Array
+var goalQbitState2 : Array
+var currentQbitState1 : Array = [[Complex.new().init(0,0), Complex.new().init(1,0)]]
+var currentQbitState2 : Array = [[Complex.new().init(0,0), Complex.new().init(1,0)]]
 var gatesQbit1: Array = []
 var gatesQbit2: Array = []
 var mutexGates: Mutex
@@ -62,14 +65,14 @@ func createGateHolderColumn(index)->void:
 	auxGateHolder2.connect("new_gate_dropped", self, "addGateQbit2", [index])
 	auxGateHolder2.init(false)
 	
-	auxGateHolder1.connect("prev_2_qbits_no_gate", auxGateHolder2, "reset")
-	auxGateHolder1.connect("new_gate_2_qbits_dropped", auxGateHolder2, "gateDrop")
-	auxGateHolder1.connect("new_gate_1_qbit_dropped", auxGateHolder2, "neighborDropped1QbitGate")
+	auxGateHolder1.connect("prev_2_qbits_no_gate", auxGateHolder2, "resetVisuals")
+	auxGateHolder1.connect("new_gate_2_qbits_dropped", auxGateHolder2, "gateDropVisuals")
+	auxGateHolder1.connect("new_gate_1_qbit_dropped", auxGateHolder2, "resetVisuals")
 	
 	
-	auxGateHolder2.connect("prev_2_qbits_no_gate", auxGateHolder1, "reset")
-	auxGateHolder2.connect("new_gate_2_qbits_dropped", auxGateHolder1, "gateDrop")
-	auxGateHolder2.connect("new_gate_1_qbit_dropped", auxGateHolder1, "neighborDropped1QbitGate")
+	auxGateHolder2.connect("prev_2_qbits_no_gate", auxGateHolder1, "resetVisuals")
+	auxGateHolder2.connect("new_gate_2_qbits_dropped", auxGateHolder1, "gateDropVisuals")
+	auxGateHolder2.connect("new_gate_1_qbit_dropped", auxGateHolder1, "resetVisuals")
 
 
 func createVBoxContainer()->VBoxContainer:
@@ -81,23 +84,29 @@ func createVBoxContainer()->VBoxContainer:
 	return vBoxContainer
 
 
-func setInitialQbitState(auxQbitState: Array)->void:
-	initialQbitState = auxQbitState
+func setInitialQbitStates(auxQbitState1: Array, auxQbitState2: Array)->void:
+	initialQbitState1 = auxQbitState1
+	initialQbitState2 = auxQbitState2
 
-func setGoalQbitState(auxQbitState: Array)->void:
-	goalQbitState = auxQbitState
+func setGoalQbitStates(auxQbitState1: Array, auxQbitState2: Array)->void:
+	goalQbitState1 = auxQbitState1
+	goalQbitState2 = auxQbitState2
 
 
 func addGateQbit1(gate, index)->void:
 	mutexGates.lock()
 	
 	
-	if(gatesQbit2[index] == null || !gatesQbit2[index].is2QbitGate()): 
-		# si el otro lugar esta vacio o tiene una compuerta de 1 qbit
-		gatesQbit1[index] = gate
-		calculateQbitState()
-		
-		print("agrega gate 1 con mat: ", gate.getMatrix())
+	gatesQbit1[index] = gate
+	if(gate.is2QbitGate()):
+		gatesQbit2[index] = gate
+	elif(gatesQbit2[index] != null && gatesQbit2[index].is2QbitGate()):
+		# como llega una de 1 qbit -> hay que sacar la de 2 qbit del slot vecino si es que hubiese
+		gatesQbit2[index] = null
+	
+	calculateQbitState()
+	
+	print("agrega gate 1 con mat: ", gate.getMatrix())
 	
 	
 	
@@ -107,7 +116,12 @@ func addGateQbit1(gate, index)->void:
 func removeGateQbit1(index)->void:
 	mutexGates.lock()
 	
-	gatesQbit1[index] = null
+	if(gatesQbit1[index].is2QbitGate()):
+		gatesQbit1[index] = null
+		gatesQbit2[index] = null
+	else:
+		gatesQbit1[index] = null
+	
 	calculateQbitState()
 	
 	print("saca gate 1")
@@ -118,12 +132,16 @@ func removeGateQbit1(index)->void:
 func addGateQbit2(gate, index)->void:
 	mutexGates.lock()
 	
-	if(gatesQbit1[index] == null || !gatesQbit1[index].is2QbitGate()):
-		# si el otro lugar esta vacio o tiene una compuerta de 1 qbit
-		gatesQbit2[index] = gate
-		calculateQbitState()
-		
-		print("agrega gate 2 con mat: ", gate.getMatrix())
+	gatesQbit2[index] = gate
+	if(gate.is2QbitGate()):
+		gatesQbit1[index] = gate
+	elif(gatesQbit1[index] != null && gatesQbit1[index].is2QbitGate()):
+		# como llega una de 1 qbit -> hay que sacar la de 2 qbit del slot vecino si es que hubiese
+		gatesQbit1[index] = null
+	
+	calculateQbitState()
+	
+	print("agrega gate 2 con mat: ", gate.getMatrix())
 	
 	
 	
@@ -133,7 +151,12 @@ func addGateQbit2(gate, index)->void:
 func removeGateQbit2(index)->void:
 	mutexGates.lock()
 	
-	gatesQbit2[index] = null
+	if(gatesQbit2[index].is2QbitGate()):
+		gatesQbit2[index] = null
+		gatesQbit1[index] = null
+	else:
+		gatesQbit2[index] = null
+	
 	calculateQbitState()
 	
 	print("saca gate 2")
@@ -144,26 +167,38 @@ func removeGateQbit2(index)->void:
 func calculateQbitState()->void:
 	#print(currentQbitState)
 	
-	var auxQbitSate : Array = initialQbitState
+	var auxQbitSate1 : Array = initialQbitState1
+	var auxQbitSate2 : Array = initialQbitState2
 	
 	# TODO revisar esto para gates de 1 y 2 qbits
 	# tener en cuenta que las compuertas para 2 qbits se agregan en gatesQbit1 y gatesQbit2
 	for i in range(GATE_HOLDER_COUNT):
-		if(gatesQbit1[i] != null):
-			auxQbitSate = ComplexMatrixAlgebra.multiplyComplexMatrices(auxQbitSate, gatesQbit1[i].getMatrix())
+		if(gatesQbit1[i] == null || !gatesQbit1[i].is2QbitGate()):
+			if(gatesQbit1[i] != null):
+				auxQbitSate1 = ComplexMatrixAlgebra.multiplyComplexMatrices(auxQbitSate1, gatesQbit1[i].getMatrix())
+			if(gatesQbit2[i] != null):
+				auxQbitSate2 = ComplexMatrixAlgebra.multiplyComplexMatrices(auxQbitSate2, gatesQbit2[i].getMatrix())
+		else: # es una gate de 2 qbits
+			#var 2qbitsState = TwoQbitStateFrom1QbitStates(auxQbitSate1, auxQbitSate2)
+			#2qbitsState = ComplexMatrixAlgebra.multiplyComplexMatrices(2qbitsState, gatesQbit1[i].getMatrix())
+			#var auxQbitStates = OneQbitStatesFrom2QbitState(auxQbitSate1, auxQbitSate2)
+			#auxQbitSate1 = auxQbitStates[0]
+			#auxQbitSate2 = auxQbitStates[1]
+			pass
 	
-	currentQbitState = auxQbitSate
+	currentQbitState1 = auxQbitSate1
+	currentQbitState2 = auxQbitSate2
 	
 	#print(currentQbitState)
 	
-	emit_signal("qbit_state_changed", currentQbitState)
+	emit_signal("qbit_state_changed", currentQbitState1, currentQbitState2)
 	
 	if(isClassicMode()):
 		var ok: bool = true
 		var i: int = 0
 		
-		while (ok && i < currentQbitState[0].size()):
-			ok = currentQbitState[0][i].equals(goalQbitState[0][i])
+		while (ok && i < currentQbitState1[0].size()):
+			ok = currentQbitState1[0][i].equals(goalQbitState1[0][i]) && currentQbitState2[0][i].equals(goalQbitState2[0][i])
 			i += 1
 		
 		if(ok):

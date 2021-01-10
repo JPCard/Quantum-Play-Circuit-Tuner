@@ -20,12 +20,14 @@ func rotateSecondCurrentQbitStateArrow(rotX: float, rotY: float, rotZ: float)->v
 	$Spheres/SphereView2Qbits.rotateSecondQbitStateArrow(rotX, rotY, rotZ)
 
 
-func updateCurrentQbitSystem(matrix:Array)->void:
-	$Matrices/MatrixView2Qbits.updateQbitSystem(matrix)
+func updateCurrentQbitSystem(qbitStateMatrix1: Array, qbitStateMatrix2: Array)->void:
+	$Matrices/MatrixView2Qbits.updateQbitSystem(TwoQbitStateFrom1QbitStates(qbitStateMatrix1, qbitStateMatrix2))
 	
-	#TODO pasar de matriz de estado a rotaciones
-	#rotateFirstCurrentQbitStateArrow(rotX, rotY, rotZ)
-	#rotateSecondCurrentQbitStateArrow(rotX, rotY, rotZ)
+	var blochAngles: Array = stateToBlochSphereRotation(qbitStateMatrix1)
+	rotateFirstCurrentQbitStateArrow(0,-blochAngles[0],blochAngles[1])
+	
+	blochAngles = stateToBlochSphereRotation(qbitStateMatrix2)
+	rotateSecondCurrentQbitStateArrow(0,-blochAngles[0],blochAngles[1])
 
 
 func rotateSpheresHorizontally(rotY: float)->void:

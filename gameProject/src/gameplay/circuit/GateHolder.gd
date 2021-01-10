@@ -42,16 +42,33 @@ func gateDrop(auxGate)->void:
 		
 		if(auxGate.is2QbitGate()): # si es gate para 2 qbits
 			emit_signal("new_gate_2_qbits_dropped", gate)
+			if(atTheTop):
+				$Sprite.show()
+			else:
+				$Sprite.hide() # el sprite lo va a mostrar el gateHolder de arriba
 		else:
 			emit_signal("new_gate_1_qbit_dropped")
+			$Sprite.show() # si es de 1 qbit muestra siempre
 		
 		setSpriteTexture(gate.getTexture())
 		
-		if(atTheTop):
-			$Sprite.show()
-		else:
-			$Sprite.hide() # el sprite lo va a mostrar el gateHolder de arriba
+		
 
+func gateDropVisuals(auxGate)->void:
+	if(getGate() != auxGate):
+		setGate(auxGate)
+		$DragZone.mouse_filter = Control.MOUSE_FILTER_STOP
+		
+		if(auxGate.is2QbitGate()): # si es gate para 2 qbits
+			if(atTheTop):
+				$Sprite.show()
+			else:
+				$Sprite.hide() # el sprite lo va a mostrar el gateHolder de arriba
+		else:
+			$Sprite.show() # si es de 1 qbit muestra siempre
+		
+		setSpriteTexture(gate.getTexture())
+		
 
 
 
@@ -94,8 +111,15 @@ func reset()->void:
 		emit_signal("no_gate")
 
 
-func neighborDropped1QbitGate()->void:
+func resetVisuals()->void:
 	if(getGate() != null && getGate().is2QbitGate()):
-		reset()
+		setGate(null) # pierde su gate porque se va a arrastrar
+		
+		# no manda señal de prev_2_qbits_no_gate en este caso
+		
+		setSpriteTexture(GATE_HOLDER_TEXTURE)
+		$Sprite.show()
+		$DragZone.mouse_filter = Control.MOUSE_FILTER_PASS
+		
 
 
