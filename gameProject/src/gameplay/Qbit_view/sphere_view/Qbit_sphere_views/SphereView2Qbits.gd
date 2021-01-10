@@ -34,10 +34,10 @@ func moveToSecondCurrentSphereLocation()->void:
 # cambia el vector de estado del Qbit de arriba
 # corrige ejes Y y Z, ya que en godot estan invertidos
 func rotateFirstQbitStateArrow(rotX: float, rotY: float, rotZ: float)->void:
-	blochSphere2D.rotateStateArrow(rotX, rotZ, rotY)
+	$BlochSphere2D.rotateStateArrow(rotX, rotZ, rotY)
 
 # cambia el vector de estado del Qbit de abajo
 # corrige ejes Y y Z, ya que en godot estan invertidos
 func rotateSecondQbitStateArrow(rotX: float, rotY: float, rotZ: float)->void:
-	blochSphere2D_2.rotateStateArrow(rotX, rotZ, rotY)
+	$BlochSphere2D_2.rotateStateArrow(rotX, rotZ, rotY)
 
