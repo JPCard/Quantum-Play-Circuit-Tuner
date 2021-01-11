@@ -3,6 +3,7 @@ extends "res://src/user_interface/statesUI/StateInGameUI.gd"
 func _ready():
 	$Circuit2Qbits.setClassicMode(false)
 	$TitleBannerInGame.setTitle("Modo libre")
+	print_debug("entra al modo libre")
 
 func init(auxPrevUI: StateUI)->void:
 	prevUI = auxPrevUI

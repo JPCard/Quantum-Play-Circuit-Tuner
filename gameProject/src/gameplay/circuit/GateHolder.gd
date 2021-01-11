@@ -80,7 +80,7 @@ func createDragData(pos):
 		var gateSprite = Sprite.new()
 		gateSprite.texture = sprite.texture
 		control.add_child(gateSprite)
-		gateSprite.position = Vector2(gateSprite.get_rect().position.x + 85,  gateSprite.get_rect().position.y + 130)
+		gateSprite.position = Vector2(gateSprite.get_rect().position.x + 305,  gateSprite.get_rect().position.y + 60)
 		#print(gateSprite.get_rect().position)
 		set_drag_preview(control)
 		

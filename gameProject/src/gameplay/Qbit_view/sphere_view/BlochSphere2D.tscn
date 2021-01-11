@@ -21,7 +21,6 @@ script = ExtResource( 1 )
 size = Vector2( 700, 700 )
 world = SubResource( 2 )
 transparent_bg = true
-msaa = 1
 
 [node name="BlochSphere" parent="Viewport" instance=ExtResource( 2 )]
 
