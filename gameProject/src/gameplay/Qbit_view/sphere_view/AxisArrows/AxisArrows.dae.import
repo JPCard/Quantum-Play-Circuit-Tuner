@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/arrow.dae-d7194476f06eb2f74c8e3da67b0723c0.scn"
+path="res://.import/AxisArrows.dae-52ad491d9cd54f83c207fc59f4d77a5e.scn"
 
 [deps]
 
-source_file="res://src/gameplay/sphere_view/StateArrow/arrow.dae"
-dest_files=[ "res://.import/arrow.dae-d7194476f06eb2f74c8e3da67b0723c0.scn" ]
+source_file="res://src/gameplay/Qbit_view/sphere_view/AxisArrows/AxisArrows.dae"
+dest_files=[ "res://.import/AxisArrows.dae-52ad491d9cd54f83c207fc59f4d77a5e.scn" ]
 
 [params]
 

@@ -2,9 +2,6 @@ extends Control
 
 const BlochSphere = preload("res://src/gameplay/Qbit_view/sphere_view/BlochSphere.gd")
 
-onready var blochSphereSprite: Sprite = $BlochSphereSprite
-onready var viewport: Viewport = $Viewport
-onready var blochSphere: BlochSphere = $Viewport/BlochSphere
 
 
 
