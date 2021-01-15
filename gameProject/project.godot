@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://src/user_interface/LevelBt.gd"
 }, {
 "base": "Control",
+"class": "QbitView",
+"language": "GDScript",
+"path": "res://src/gameplay/Qbit_view/QbitView.gd"
+}, {
+"base": "Control",
 "class": "StateUI",
 "language": "GDScript",
 "path": "res://src/user_interface/statesUI/StateUI.gd"
@@ -33,6 +38,7 @@ _global_script_class_icons={
 "BlochSphere2D": "",
 "Complex": "",
 "LevelBt": "",
+"QbitView": "",
 "StateUI": ""
 }
 

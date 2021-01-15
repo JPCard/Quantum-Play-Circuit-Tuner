@@ -1,6 +1,7 @@
 extends Control
 
 signal qbit_state_changed(currentQbitState1, currentQbitState1)
+signal two_qbit_state_changed(current2QbitState)
 signal level_won
 
 
@@ -14,8 +15,8 @@ var initialQbitState1 : Array = [[Complex.new().init(0,0), Complex.new().init(1,
 var initialQbitState2 : Array = [[Complex.new().init(0,0), Complex.new().init(1,0)]]
 var goalQbitState1 : Array
 var goalQbitState2 : Array
-var currentQbitState1 : Array = [[Complex.new().init(0,0), Complex.new().init(1,0)]]
-var currentQbitState2 : Array = [[Complex.new().init(0,0), Complex.new().init(1,0)]]
+var goal2QbitState : Array 
+var current2QbitState : Array
 var gatesQbit1: Array = []
 var gatesQbit2: Array = []
 var mutexGates: Mutex
@@ -87,10 +88,12 @@ func createVBoxContainer()->VBoxContainer:
 func setInitialQbitStates(auxQbitState1: Array, auxQbitState2: Array)->void:
 	initialQbitState1 = auxQbitState1
 	initialQbitState2 = auxQbitState2
+	
 
 func setGoalQbitStates(auxQbitState1: Array, auxQbitState2: Array)->void:
 	goalQbitState1 = auxQbitState1
 	goalQbitState2 = auxQbitState2
+	goal2QbitState = QbitView.TwoQbitStateFrom1QbitStates(goalQbitState1, goalQbitState2)
 
 
 func addGateQbit1(gate, index)->void:
@@ -167,38 +170,63 @@ func removeGateQbit2(index)->void:
 func calculateQbitState()->void:
 	#print(currentQbitState)
 	
-	var auxQbitSate1 : Array = initialQbitState1
-	var auxQbitSate2 : Array = initialQbitState2
+	var auxCurrentQbitSate1 : Array = initialQbitState1
+	var auxCurrentQbitSate2 : Array = initialQbitState2
+	var oneQbitState : bool = true
+	var auxCurrent2QbitsState : Array
+	var aux2QbitGateMatrix : Array
+	
 	
 	# TODO revisar esto para gates de 1 y 2 qbits
 	# tener en cuenta que las compuertas para 2 qbits se agregan en gatesQbit1 y gatesQbit2
 	for i in range(GATE_HOLDER_COUNT):
 		if(gatesQbit1[i] == null || !gatesQbit1[i].is2QbitGate()):
-			if(gatesQbit1[i] != null):
-				auxQbitSate1 = ComplexMatrixAlgebra.multiplyComplexMatrices(auxQbitSate1, gatesQbit1[i].getMatrix())
-			if(gatesQbit2[i] != null):
-				auxQbitSate2 = ComplexMatrixAlgebra.multiplyComplexMatrices(auxQbitSate2, gatesQbit2[i].getMatrix())
+			if(oneQbitState): # 1 qbit states (2 de 1x2)
+				if(gatesQbit1[i] != null):
+					auxCurrentQbitSate1 = ComplexMatrixAlgebra.multiplyComplexMatrices(auxCurrentQbitSate1, gatesQbit1[i].getMatrix())
+				if(gatesQbit2[i] != null):
+					auxCurrentQbitSate2 = ComplexMatrixAlgebra.multiplyComplexMatrices(auxCurrentQbitSate2, gatesQbit2[i].getMatrix())
+			else: # 2 qbit state (1x4)
+				
+				if(gatesQbit1[i] != null):
+					if(gatesQbit2[i] != null): # gate1 (x) gate2
+						aux2QbitGateMatrix = ComplexMatrixAlgebra.tensorMultiplyComplexMatrices(gatesQbit1[i].getMatrix(), gatesQbit2[i].getMatrix())
+					else: # gate1 (x) I
+						aux2QbitGateMatrix = ComplexMatrixAlgebra.tensorPostMultiplyDim2IdentityToComplexMatrix(gatesQbit1[i].getMatrix())
+					
+					auxCurrent2QbitsState = ComplexMatrixAlgebra.multiplyComplexMatrices(auxCurrent2QbitsState, aux2QbitGateMatrix)
+				elif(gatesQbit2[i] != null): # I (x) gate2
+					aux2QbitGateMatrix = ComplexMatrixAlgebra.tensorPreMultiplyDim2IdentityToComplexMatrix(gatesQbit2[i].getMatrix())
+					
+					auxCurrent2QbitsState = ComplexMatrixAlgebra.multiplyComplexMatrices(auxCurrent2QbitsState, aux2QbitGateMatrix)
+				#else:
+				# no habia gate arriba ni abajo
+			
 		else: # es una gate de 2 qbits
-			#var 2qbitsState = TwoQbitStateFrom1QbitStates(auxQbitSate1, auxQbitSate2)
-			#2qbitsState = ComplexMatrixAlgebra.multiplyComplexMatrices(2qbitsState, gatesQbit1[i].getMatrix())
-			#var auxQbitStates = OneQbitStatesFrom2QbitState(auxQbitSate1, auxQbitSate2)
-			#auxQbitSate1 = auxQbitStates[0]
-			#auxQbitSate2 = auxQbitStates[1]
-			pass
+			
+			if(oneQbitState):
+				oneQbitState = false
+				auxCurrent2QbitsState = QbitView.TwoQbitStateFrom1QbitStates(auxCurrentQbitSate1, auxCurrentQbitSate2)
+			
+			auxCurrent2QbitsState = ComplexMatrixAlgebra.multiplyComplexMatrices(auxCurrent2QbitsState, gatesQbit1[i].getMatrix())
+			
 	
-	currentQbitState1 = auxQbitSate1
-	currentQbitState2 = auxQbitSate2
 	
-	#print(currentQbitState)
 	
-	emit_signal("qbit_state_changed", currentQbitState1, currentQbitState2)
+	if(oneQbitState):
+		auxCurrent2QbitsState = QbitView.TwoQbitStateFrom1QbitStates(auxCurrentQbitSate1, auxCurrentQbitSate2)
+		emit_signal("qbit_state_changed", auxCurrentQbitSate1, auxCurrentQbitSate2)
+	else:
+		emit_signal("two_qbit_state_changed", auxCurrent2QbitsState)
+	
+	
 	
 	if(isClassicMode()):
 		var ok: bool = true
 		var i: int = 0
 		
-		while (ok && i < currentQbitState1[0].size()):
-			ok = currentQbitState1[0][i].equals(goalQbitState1[0][i]) && currentQbitState2[0][i].equals(goalQbitState2[0][i])
+		while (ok && i < auxCurrent2QbitsState[0].size()):
+			ok = auxCurrent2QbitsState[0][i].equals(goal2QbitState[0][i])
 			i += 1
 		
 		if(ok):

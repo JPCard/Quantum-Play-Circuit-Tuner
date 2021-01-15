@@ -80,6 +80,8 @@ func argument()->float:
 	return atan2(getImaginary(), getReal())
 
 func absoluteValue()->float:
-	return sqrt(pow(getReal(), 2) + pow(getImaginary(), 2))
+	return sqrt(probability())
 
+func probability()->float:
+	return pow(getReal(), 2) + pow(getImaginary(), 2)
 

@@ -1,5 +1,7 @@
 extends Control
 
+class_name QbitView
+
 onready var spheres: Control = $Spheres
 onready var matrices: Control = $Matrices
 
@@ -63,7 +65,7 @@ func stateToBlochSphereRotation(matrix: Array)->Array:
 
 # parameters -> 2 estados de 1 qbit
 # returns -> 1 estado de 2 qbits
-func TwoQbitStateFrom1QbitStates(oneQbitStateMatrix1: Array, oneQbitStateMatrix2: Array)->Array:
+static func TwoQbitStateFrom1QbitStates(oneQbitStateMatrix1: Array, oneQbitStateMatrix2: Array)->Array:
 	var alpha1: Complex = oneQbitStateMatrix1[0][0]
 	var beta1: Complex = oneQbitStateMatrix1[0][1]
 	
@@ -74,24 +76,4 @@ func TwoQbitStateFrom1QbitStates(oneQbitStateMatrix1: Array, oneQbitStateMatrix2
 	
 	return [[ alpha1.multiplyTo(alpha2), alpha1.multiplyTo(beta2),
 			  beta1.multiplyTo(alpha2), beta1.multiplyTo(beta2) ]]
-
-
-# TODO
-# parameters -> 1 estado de 2 qbits
-# returns -> 2 estados de 1 qbit
-func OneQbitStatesFrom2QbitState(twoQbitsStateMatrix: Array)->Array:
-	var a1a2: Complex = twoQbitsStateMatrix[0][0]
-	var a1b2: Complex = twoQbitsStateMatrix[0][1]
-	var b1a2: Complex = twoQbitsStateMatrix[0][2]
-	var b1b2: Complex = twoQbitsStateMatrix[0][3]
-	
-	var a1: Complex
-	var b1: Complex
-	var a2: Complex
-	var b2: Complex
-	
-	
-	
-	
-	return [ [[a1, b1]], [[a2, b2]]]
 
