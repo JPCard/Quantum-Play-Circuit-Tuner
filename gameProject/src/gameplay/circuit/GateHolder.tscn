@@ -18,9 +18,10 @@ __meta__ = {
 centered = false
 
 [node name="DragZone" type="Control" parent="."]
+margin_top = 40.0
 margin_right = 147.0
-margin_bottom = 200.0
-rect_min_size = Vector2( 147, 200 )
+margin_bottom = 90.0
+rect_min_size = Vector2( 147, 100 )
 mouse_filter = 1
 script = ExtResource( 1 )
 __meta__ = {
@@ -29,9 +30,9 @@ __meta__ = {
 
 [node name="DropZone" type="Control" parent="DragZone"]
 margin_left = -35.0
-margin_top = -30.0
+margin_top = 20.0
 margin_right = 174.0
-margin_bottom = 251.0
+margin_bottom = 233.0
 mouse_filter = 1
 script = ExtResource( 4 )
 __meta__ = {
