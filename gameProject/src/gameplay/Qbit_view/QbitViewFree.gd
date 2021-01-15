@@ -30,6 +30,23 @@ func updateCurrentQbitSystem(qbitStateMatrix1: Array, qbitStateMatrix2: Array)->
 	rotateSecondCurrentQbitStateArrow(0,-blochAngles[0],blochAngles[1])
 
 
+func updateCurrentTwoQbitSystem(twoQbitStateMatrix: Array)->void:
+	$Matrices/MatrixView2Qbits.updateQbitSystem(twoQbitStateMatrix)
+	
+	if(abs(twoQbitStateMatrix[0][0].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 00
+		rotateFirstCurrentQbitStateArrow(0, 0, 0)
+		rotateSecondCurrentQbitStateArrow(0, 0, 0)
+		# mostrar vista esfera
+	elif(abs(twoQbitStateMatrix[0][3].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 11
+		rotateFirstCurrentQbitStateArrow(0, PI, 0)
+		rotateSecondCurrentQbitStateArrow(0, PI, 0)
+		# mostrar vista esfera
+	else:
+		pass # esconder vista esfera
+
+
+
+
 func rotateSpheresHorizontally(rotY: float)->void:
 	sphereView2Qbits.rotateSpheresHorizontally(rotY)
 

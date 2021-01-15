@@ -21,3 +21,7 @@ func updateCurrentQbitViews(qbitStateMatrix1: Array, qbitStateMatrix2: Array)->v
 # cada vez que se entra a este menu
 func _on_Circuit2Qbits_tree_entered():
 	$Circuit2Qbits.resetGateHolders()
+
+
+func updateCurrentQbitViews2QbitState(twoQbitStateMatrix: Array):
+	$QbitViewFree.updateCurrentTwoQbitSystem(twoQbitStateMatrix)

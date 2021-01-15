@@ -75,6 +75,10 @@ func updateCurrentQbitViews(qbitStateMatrix1: Array, qbitStateMatrix2: Array)->v
 	$QbitViewClassic2Qbits.updateCurrentQbitSystem(qbitStateMatrix1, qbitStateMatrix2)
 
 
+func updateCurrentQbitViews2QbitState(twoQbitStateMatrix: Array)->void:
+	$QbitViewClassic2Qbits.updateCurrentTwoQbitSystem(twoQbitStateMatrix)
+
+
 func updateGoalQbitViews(qbitStateMatrix1: Array, qbitStateMatrix2: Array)->void:
 	$QbitViewClassic2Qbits.updateGoalQbitSystem(qbitStateMatrix1, qbitStateMatrix2)
 

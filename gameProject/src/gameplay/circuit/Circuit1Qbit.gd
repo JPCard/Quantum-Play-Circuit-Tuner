@@ -10,7 +10,6 @@ onready var hBoxContainer: HBoxContainer = $ScrollContainer/HBoxContainer
 
 var initialQbitState : Array = [[Complex.new().init(0,0), Complex.new().init(1,0)]]
 var goalQbitState : Array
-var currentQbitState : Array = [[Complex.new().init(0,0), Complex.new().init(1,0)]]
 var gates: Array = []
 var mutexGates: Mutex
 
@@ -74,21 +73,20 @@ func resetGateHolders()->void:
 
 
 func calculateQbitState()->void:
-	#print(currentQbitState)
+	#print(auxCurrentQbitState)
 	
-	var auxQbitSate : Array = initialQbitState
+	var auxCurrentQbitState : Array = initialQbitState
 	
 	for i in range(GATE_HOLDER_COUNT):
 		if(gates[i] != null):
-			auxQbitSate = ComplexMatrixAlgebra.multiplyComplexMatrices(auxQbitSate, gates[i].getMatrix())
+			auxCurrentQbitState = ComplexMatrixAlgebra.multiplyComplexMatrices(auxCurrentQbitState, gates[i].getMatrix())
 	
-	currentQbitState = auxQbitSate
 	
-	#print(currentQbitState)
+	#print(auxCurrentQbitState)
 	
-	emit_signal("qbit_state_changed", currentQbitState)
+	emit_signal("qbit_state_changed", auxCurrentQbitState)
 	
-	if(currentQbitState[0][0].equals(goalQbitState[0][0]) && currentQbitState[0][1].equals(goalQbitState[0][1])):
+	if(auxCurrentQbitState[0][0].equals(goalQbitState[0][0]) && auxCurrentQbitState[0][1].equals(goalQbitState[0][1])):
 		emit_signal("level_won")
 	
 
