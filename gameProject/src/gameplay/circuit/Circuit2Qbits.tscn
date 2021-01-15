@@ -6,6 +6,8 @@
 [ext_resource path="res://src/gameplay/circuit/Circuit2Qbits.gd" type="Script" id=4]
 
 [node name="Circuit2Qbits" instance=ExtResource( 1 )]
+anchor_left = -0.000656191
+anchor_right = -0.000656191
 margin_bottom = 437.0
 script = ExtResource( 4 )
 
@@ -15,9 +17,13 @@ centered = false
 offset = Vector2( 0, 328 )
 
 [node name="BackgrounSprite2" type="Sprite" parent="." index="1"]
-position = Vector2( 128, 218 )
+position = Vector2( 128, 221.638 )
+scale = Vector2( 1, 0.983462 )
 texture = ExtResource( 2 )
 centered = false
+
+[node name="BackgroundSprite" parent="." index="3"]
+scale = Vector2( 1, 1.01834 )
 
 [node name="ScrollContainer" parent="." index="4"]
 margin_bottom = 438.0
