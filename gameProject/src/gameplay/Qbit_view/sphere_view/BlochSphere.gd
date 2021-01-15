@@ -24,3 +24,12 @@ func rotateStateArrow(rotX: float, rotY: float, rotZ: float)->void:
 # genera una rotacion horizontal de la esfera de bloch entera
 func rotateBlochSphereHorizontally(rotY: float)->void:
 	blochSphereContainer.rotate_y(rotY)
+
+func showStateArrow()->void:
+	stateArrow.show()
+
+func hideStateArrow()->void:
+	stateArrow.hide()
+
+
+
