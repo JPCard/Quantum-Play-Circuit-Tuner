@@ -4,6 +4,7 @@ class_name QbitView
 
 onready var spheres: Control = $Spheres
 onready var matrices: Control = $Matrices
+onready var qbitViewBt = $QbitViewBt
 
 var pressed = false
 var last_position = Vector2()
@@ -11,7 +12,7 @@ var complex0: Complex = Complex.new().init(0,0)
 var complex1: Complex = Complex.new().init(1,0)
 
 func _ready():
-	showSphereView()
+	qbitViewBt.selectMatrixView()
 
 
 

@@ -36,13 +36,21 @@ func updateCurrentTwoQbitSystem(twoQbitStateMatrix: Array)->void:
 	if(abs(twoQbitStateMatrix[0][0].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 00
 		rotateFirstCurrentQbitStateArrow(0, 0, 0)
 		rotateSecondCurrentQbitStateArrow(0, 0, 0)
-		# mostrar vista esfera
+		sphereView2Qbits.showQbitStates()
+	elif(abs(twoQbitStateMatrix[0][1].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 01
+		rotateFirstCurrentQbitStateArrow(0, 0, 0)
+		rotateSecondCurrentQbitStateArrow(0, PI, 0)
+		sphereView2Qbits.showQbitStates()
+	elif(abs(twoQbitStateMatrix[0][2].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 10
+		rotateFirstCurrentQbitStateArrow(0, PI, 0)
+		rotateSecondCurrentQbitStateArrow(0, 0, 0)
+		sphereView2Qbits.showQbitStates()
 	elif(abs(twoQbitStateMatrix[0][3].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 11
 		rotateFirstCurrentQbitStateArrow(0, PI, 0)
 		rotateSecondCurrentQbitStateArrow(0, PI, 0)
-		# mostrar vista esfera
+		sphereView2Qbits.showQbitStates()
 	else:
-		pass # esconder vista esfera
+		sphereView2Qbits.hideQbitStates()
 
 
 

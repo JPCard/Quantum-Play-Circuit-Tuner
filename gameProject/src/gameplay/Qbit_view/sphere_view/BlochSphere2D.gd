@@ -8,6 +8,8 @@ onready var blochSphereSprite: Sprite = $BlochSphereSprite
 onready var viewport: Viewport = $Viewport
 onready var blochSphere: BlochSphere = $Viewport/BlochSphere
 
+onready var undefinedSphereSprite: Sprite = $UndefinedSphereSprite
+
 var pressed = false
 var last_position = Vector2()
 
@@ -15,6 +17,7 @@ var last_position = Vector2()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	showQbitState()
 	$ColorRect.hide()
 	renderSphere()
 
@@ -40,3 +43,11 @@ func moveToFirstGoalSphereLocation()->void:
 # cambia de posicion a la esfera objetivo de abajo
 func moveToSecondGoalSphereLocation()->void:
 	blochSphere.translation = Vector3(SPHERE_SEPARATION * 3, 0, 0)
+
+func hideQbitState()->void:
+	undefinedSphereSprite.show()
+	blochSphere.hideStateArrow()
+
+func showQbitState()->void:
+	blochSphere.showStateArrow()
+	undefinedSphereSprite.hide()
