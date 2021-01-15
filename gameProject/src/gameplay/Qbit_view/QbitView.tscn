@@ -19,17 +19,17 @@ margin_right = 662.0
 margin_bottom = 103.0
 
 [node name="Spheres" type="Control" parent="."]
-margin_top = 120.0
+margin_top = 190.0
 margin_right = 847.0
-margin_bottom = 817.0
+margin_bottom = 815.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Matrices" type="Control" parent="."]
-margin_top = 120.0
+margin_top = 190.0
 margin_right = 847.0
-margin_bottom = 817.0
+margin_bottom = 815.0
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false

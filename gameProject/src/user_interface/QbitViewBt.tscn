@@ -14,27 +14,33 @@ __meta__ = {
 
 [node name="MatrixSelectBt" type="Button" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
+margin_left = -24.0
+margin_top = -48.0
 margin_right = 239.0
-margin_bottom = 78.0
+margin_bottom = 196.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MatrixSelectedSprite" type="Sprite" parent="MatrixSelectBt"]
+position = Vector2( 26, 49 )
+scale = Vector2( 1, 1.17288 )
 texture = ExtResource( 2 )
 centered = false
 
 [node name="SphereSelectBt" type="Button" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
 margin_left = 239.0
-margin_right = 480.0
-margin_bottom = 78.0
+margin_top = -46.0
+margin_right = 505.0
+margin_bottom = 188.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SphereSelectedSprite" type="Sprite" parent="SphereSelectBt"]
-position = Vector2( -240, 0 )
+position = Vector2( -237, 47 )
+scale = Vector2( 1, 1.19209 )
 texture = ExtResource( 1 )
 centered = false
 [connection signal="pressed" from="MatrixSelectBt" to="." method="selectMatrixView"]
