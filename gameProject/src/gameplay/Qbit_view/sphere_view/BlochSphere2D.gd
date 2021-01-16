@@ -49,5 +49,5 @@ func hideQbitState()->void:
 	blochSphere.hideStateArrow()
 
 func showQbitState()->void:
-	blochSphere.showStateArrow()
-	undefinedSphereSprite.hide()
+	$Viewport/BlochSphere.showStateArrow()
+	$UndefinedSphereSprite.hide()

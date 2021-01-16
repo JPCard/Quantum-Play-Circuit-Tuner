@@ -26,7 +26,7 @@ func rotateBlochSphereHorizontally(rotY: float)->void:
 	blochSphereContainer.rotate_y(rotY)
 
 func showStateArrow()->void:
-	stateArrow.show()
+	$BlochSphereContainer/StateArrow.show()
 
 func hideStateArrow()->void:
 	stateArrow.hide()
