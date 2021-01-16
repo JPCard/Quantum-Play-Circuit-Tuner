@@ -21,6 +21,10 @@ var gatesQbit1: Array = []
 var gatesQbit2: Array = []
 var mutexGates: Mutex
 
+var complex0: Complex = Complex.new().init(0, 0)
+var complex1: Complex = Complex.new().init(1, 0)
+var pauliXMatrix : Array = [[complex0, complex1],[complex1, complex0]]
+
 var classicMode: bool setget setClassicMode, isClassicMode
 
 func _ready():
@@ -109,7 +113,7 @@ func addGateQbit1(gate, index)->void:
 	
 	calculateQbitState()
 	
-	print("agrega gate 1 con mat: ", gate.getMatrix())
+	#print("agrega gate 1 con mat: ", gate.getMatrix())
 	
 	
 	
@@ -127,7 +131,7 @@ func removeGateQbit1(index)->void:
 	
 	calculateQbitState()
 	
-	print("saca gate 1")
+	#print("saca gate 1")
 	
 	mutexGates.unlock()
 
@@ -144,7 +148,7 @@ func addGateQbit2(gate, index)->void:
 	
 	calculateQbitState()
 	
-	print("agrega gate 2 con mat: ", gate.getMatrix())
+	#print("agrega gate 2 con mat: ", gate.getMatrix())
 	
 	
 	
@@ -162,7 +166,7 @@ func removeGateQbit2(index)->void:
 	
 	calculateQbitState()
 	
-	print("saca gate 2")
+	#print("saca gate 2")
 	
 	mutexGates.unlock()
 
@@ -205,10 +209,18 @@ func calculateQbitState()->void:
 		else: # es una gate de 2 qbits
 			
 			if(oneQbitState):
-				oneQbitState = false
-				auxCurrent2QbitsState = QbitView.TwoQbitStateFrom1QbitStates(auxCurrentQbitSate1, auxCurrentQbitSate2)
-			
-			auxCurrent2QbitsState = ComplexMatrixAlgebra.multiplyComplexMatrices(auxCurrent2QbitsState, gatesQbit1[i].getMatrix())
+				# analisis para el caso de la gate cX
+				if(abs(auxCurrentQbitSate1[0][1].probability() - 1) < GameGlobals.NUMERIC_TOLERANCE): # control bit = 1
+					auxCurrentQbitSate2 = ComplexMatrixAlgebra.multiplyComplexMatrices(auxCurrentQbitSate2, pauliXMatrix) # aplica not al 2do qbit
+					# oneQbitSate sigue siendo true
+				elif(abs(auxCurrentQbitSate1[0][0].probability() - 1) > GameGlobals.NUMERIC_TOLERANCE): # control bit != 0
+					oneQbitState = false
+					auxCurrent2QbitsState = QbitView.TwoQbitStateFrom1QbitStates(auxCurrentQbitSate1, auxCurrentQbitSate2)
+					auxCurrent2QbitsState = ComplexMatrixAlgebra.multiplyComplexMatrices(auxCurrent2QbitsState, gatesQbit1[i].getMatrix())
+				#else: control bit = 0
+				#	pass
+			else:
+				auxCurrent2QbitsState = ComplexMatrixAlgebra.multiplyComplexMatrices(auxCurrent2QbitsState, gatesQbit1[i].getMatrix())
 			
 	
 	

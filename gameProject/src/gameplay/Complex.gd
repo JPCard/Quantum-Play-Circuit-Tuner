@@ -1,7 +1,6 @@
 extends Node
 class_name Complex
 
-const NUM_DIF_TOLERANCE: float = 0.0001
 
 
 var real: float setget setReal, getReal
@@ -66,7 +65,7 @@ func equals(complex)->bool:
 		return false
 	if(self == complex):
 		return true
-	elif(abs(getReal() - complex.getReal()) < NUM_DIF_TOLERANCE  && abs(getImaginary() - complex.getImaginary()) < NUM_DIF_TOLERANCE):
+	elif(abs(getReal() - complex.getReal()) < GameGlobals.NUMERIC_TOLERANCE  && abs(getImaginary() - complex.getImaginary()) < GameGlobals.NUMERIC_TOLERANCE):
 		# corrige redondeos de la computadora por operar con numeros irracionales
 		return true
 	else:

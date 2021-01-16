@@ -44,7 +44,7 @@ func updateCurrentQbitSystem(qbitStateMatrix1:Array, qbitStateMatrix2:Array)->vo
 	blochAngles = stateToBlochSphereRotation(qbitStateMatrix2)
 	rotateSecondCurrentQbitStateArrow(0,-blochAngles[0],blochAngles[1])
 	
-	# mostrar vista esfera
+	$Spheres/CurrentSphereView2Qbits.showQbitStates()
 
 
 func updateCurrentTwoQbitSystem(twoQbitStateMatrix: Array)->void:

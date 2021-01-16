@@ -46,5 +46,5 @@ func hideQbitStates()->void:
 	blochSphere2D_2.hideQbitState()
 
 func showQbitStates()->void:
-	blochSphere2D.showQbitState()
-	blochSphere2D_2.showQbitState()
+	$BlochSphere2D.showQbitState()
+	$BlochSphere2D_2.showQbitState()

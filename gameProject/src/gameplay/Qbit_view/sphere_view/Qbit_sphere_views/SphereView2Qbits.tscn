@@ -9,7 +9,7 @@ margin_bottom = 553.0
 script = ExtResource( 3 )
 
 [node name="BlochSphere2D_2" parent="." index="1" instance=ExtResource( 2 )]
-position = Vector2( 0, 240 )
+position = Vector2( 0, 246 )
 
 [node name="RotateSprite" parent="." index="2"]
 position = Vector2( 72, 488 )
