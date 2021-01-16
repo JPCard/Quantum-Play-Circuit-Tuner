@@ -16,12 +16,6 @@ ambient_light_sky_contribution = 0.29
 [sub_resource type="World" id=2]
 environment = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
-size = 200
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 4 )
-
 [sub_resource type="DynamicFont" id=4]
 size = 30
 use_mipmaps = true
@@ -30,6 +24,12 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 30
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 200
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 4 )
@@ -59,27 +59,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UndefinedSphereSprite" type="Sprite" parent="."]
-visible = false
-self_modulate = Color( 0.301961, 0.301961, 0.301961, 1 )
-position = Vector2( -16.8179, -10.0908 )
-scale = Vector2( 1.12731, 0.921942 )
-texture = ExtResource( 3 )
-centered = false
-
-[node name="QuestionMarkLabel" type="Label" parent="UndefinedSphereSprite"]
-margin_top = -1.0
-margin_right = 252.0
-margin_bottom = 267.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 0.337255, 0.615686, 0.976471, 1 )
-text = "?"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ZeroLabel" type="Label" parent="."]
 margin_left = 154.0
 margin_top = 41.9831
@@ -100,6 +79,26 @@ margin_bottom = 252.0
 custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0.0666667, 0.176471, 0.305882, 1 )
 text = "|1>"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UndefinedSphereSprite" type="Sprite" parent="."]
+self_modulate = Color( 0.301961, 0.301961, 0.301961, 1 )
+position = Vector2( -16.8179, -1.10092 )
+scale = Vector2( 1.12731, 1.01045 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="QuestionMarkLabel" type="Label" parent="UndefinedSphereSprite"]
+margin_top = -1.0
+margin_right = 252.0
+margin_bottom = 267.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.337255, 0.615686, 0.976471, 1 )
+text = "?"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
