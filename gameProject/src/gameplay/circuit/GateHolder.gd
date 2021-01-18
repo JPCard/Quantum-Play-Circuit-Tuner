@@ -113,13 +113,15 @@ func reset()->void:
 
 func resetVisuals()->void:
 	if(getGate() != null && getGate().is2QbitGate()):
-		setGate(null) # pierde su gate porque se va a arrastrar
-		
-		# no manda señal de prev_2_qbits_no_gate en este caso
-		
-		setSpriteTexture(GATE_HOLDER_TEXTURE)
-		$Sprite.show()
-		$DragZone.mouse_filter = Control.MOUSE_FILTER_PASS
-		
+		removeGate()
+
+func removeGate()->void:
+	setGate(null) # pierde su gate porque se va a arrastrar
+	
+	# no manda señal de prev_2_qbits_no_gate en este caso
+	
+	setSpriteTexture(GATE_HOLDER_TEXTURE)
+	$Sprite.show()
+	$DragZone.mouse_filter = Control.MOUSE_FILTER_PASS
 
 

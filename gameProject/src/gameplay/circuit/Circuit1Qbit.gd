@@ -67,8 +67,16 @@ func removeGate(index)->void:
 # para limpiar las compuertas activas al momento de iniciar el nivel
 func resetGateHolders()->void:
 	for gateHolder in $ScrollContainer/HBoxContainer.get_children():
-		if(gateHolder.has_method("reset")): # solo se activa si es gateHolder
-			gateHolder.reset()
+		if(gateHolder.has_method("removeGate")): # solo se activa si es gateHolder
+			gateHolder.removeGate()
+	
+	if(gates.size() > 0): 
+		# hay que resetear las gates del circuito
+		for i in range(GATE_HOLDER_COUNT):
+			gates[i] = null # no hay gate asignada a ese numero de compuerta
+		
+		calculateQbitState() # recalcula el estado una vez que saca todas las gates
+	
 
 
 

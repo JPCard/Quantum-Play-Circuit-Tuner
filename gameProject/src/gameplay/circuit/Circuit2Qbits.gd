@@ -257,5 +257,17 @@ func createBlankColumn()->void:
 func resetGateHolders()->void:
 	for vBoxContainer in $ScrollContainer/HBoxContainer.get_children():
 		for gateHolder in vBoxContainer.get_children(): # hay varios gateHolder por columna
-			if(gateHolder.has_method("reset")): # solo se activa si es gateHolder
-				gateHolder.reset()
+			if(gateHolder.has_method("removeGate")): # solo se activa si es gateHolder
+				gateHolder.removeGate()
+	
+	if(gatesQbit1.size() > 0): 
+		# hay que resetear las gates del circuito
+		for i in range(GATE_HOLDER_COUNT):
+			gatesQbit1[i] = null # no hay gate asignada a ese numero de compuerta
+			gatesQbit2[i] = null # no hay gate asignada a ese numero de compuerta
+		
+		calculateQbitState() # recalcula el estado una vez que saca todas las gates
+	
+
+
+
