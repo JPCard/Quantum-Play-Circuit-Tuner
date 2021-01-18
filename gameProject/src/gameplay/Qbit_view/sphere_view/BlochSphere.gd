@@ -12,11 +12,24 @@ func _ready():
 
 # rota la flecha que marca el estado del Qbit para apuntar hacia otro estado
 func rotateStateArrow(rotX: float, rotY: float, rotZ: float)->void:
-	stateArrow.rotate_x(rotX)
-	stateArrow.rotate_y(rotY)
-	stateArrow.rotate_z(rotZ)
+	
+	$BlochSphereContainer/StateArrow.rotation = Vector3(rotX, rotY, rotZ)
+	
+	# no sirven porque rotan cada vez desde donde estaba rotado anteriormente
+	#$BlochSphereContainer/StateArrow.rotate_x(rotX) 
+	#$BlochSphereContainer/StateArrow.rotate_y(rotY)
+	#$BlochSphereContainer/StateArrow.rotate_z(rotZ)
 
 
 # genera una rotacion horizontal de la esfera de bloch entera
 func rotateBlochSphereHorizontally(rotY: float)->void:
 	blochSphereContainer.rotate_y(rotY)
+
+func showStateArrow()->void:
+	$BlochSphereContainer/StateArrow.show()
+
+func hideStateArrow()->void:
+	stateArrow.hide()
+
+
+

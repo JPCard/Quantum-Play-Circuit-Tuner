@@ -3,7 +3,7 @@
 [ext_resource path="res://src/user_interface/statesUI/StateInGameClassic1QbitUI.gd" type="Script" id=1]
 [ext_resource path="res://src/user_interface/statesUI/StateInGameUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/gameplay/Qbit_view/QbitViewClassic1Qbit.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/gameplay/circuit/Circuit.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/gameplay/circuit/Circuit1Qbit.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/user_interface/PopupLevelCompleted.tscn" type="PackedScene" id=5]
 
 [node name="StateInGameClassic1QbitUI" instance=ExtResource( 2 )]
@@ -21,10 +21,17 @@ margin_top = 160.0
 margin_right = 1903.0
 margin_bottom = 911.0
 
-[node name="PopupLevelCompleted" parent="." index="6" instance=ExtResource( 5 )]
+[node name="RetryLevelBt" parent="." index="5"]
+margin_left = 152.0
+margin_top = 304.0
+margin_right = 314.0
+margin_bottom = 461.0
+
+[node name="PopupLevelCompleted" parent="." index="7" instance=ExtResource( 5 )]
 visible = false
 [connection signal="level_won" from="Circuit" to="." method="win"]
 [connection signal="qbit_state_changed" from="Circuit" to="." method="updateCurrentQbitViews"]
 [connection signal="tree_entered" from="Circuit" to="." method="_on_Circuit_tree_entered"]
+[connection signal="pressed" from="RetryLevelBt" to="." method="resetUI"]
 [connection signal="level_select_bt_pressed" from="PopupLevelCompleted" to="." method="backButtonPressed"]
 [connection signal="next_level_bt_pressed" from="PopupLevelCompleted" to="." method="toNextLevel"]

@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/art/InGameUI/sphereView/rotateArrow.png" type="Texture" id=1]
 [ext_resource path="res://src/gameplay/Qbit_view/sphere_view/Qbit_sphere_views/SphereView1Qbit.gd" type="Script" id=2]
 [ext_resource path="res://src/gameplay/Qbit_view/sphere_view/BlochSphere2D.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/gameplay/Qbit_view/sphere_view/SphereView.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/gameplay/Qbit_view/sphere_view/Qbit_sphere_views/SphereView.tscn" type="PackedScene" id=4]
 
 [node name="SphereView1Qbit" instance=ExtResource( 4 )]
 anchor_right = 0.0

@@ -21,28 +21,35 @@ margin_top = 159.0
 margin_right = 1927.0
 margin_bottom = 1078.0
 
-[node name="GatesHBoxContainer" parent="." index="5"]
+[node name="RetryLevelBt" parent="." index="5"]
+margin_left = 296.0
+margin_right = 458.0
+
+[node name="GatesHBoxContainer" parent="." index="6"]
 margin_left = 174.0
 margin_right = 1305.0
 
 [node name="GatePauliX" parent="GatesHBoxContainer" index="0"]
-margin_left = 62.0
-margin_right = 220.0
+margin_left = 35.0
+margin_right = 193.0
 
 [node name="GatePauliY" parent="GatesHBoxContainer" index="1"]
-margin_left = 295.0
-margin_right = 453.0
+margin_left = 268.0
+margin_right = 426.0
 
 [node name="GatePauliZ" parent="GatesHBoxContainer" index="2"]
-margin_left = 528.0
-margin_right = 686.0
+margin_left = 501.0
+margin_right = 659.0
 
 [node name="GateHadamard" parent="GatesHBoxContainer" index="3"]
-margin_left = 761.0
-margin_right = 919.0
+margin_left = 734.0
+margin_right = 892.0
 
 [node name="GatecX" parent="GatesHBoxContainer" index="4" instance=ExtResource( 5 )]
-margin_left = 994.0
-margin_right = 1068.0
+margin_left = 967.0
+margin_right = 1095.0
 margin_bottom = 154.0
 [connection signal="qbit_state_changed" from="Circuit2Qbits" to="." method="updateCurrentQbitViews"]
+[connection signal="tree_entered" from="Circuit2Qbits" to="." method="_on_Circuit2Qbits_tree_entered"]
+[connection signal="two_qbit_state_changed" from="Circuit2Qbits" to="." method="updateCurrentQbitViews2QbitState"]
+[connection signal="pressed" from="RetryLevelBt" to="." method="resetUI"]

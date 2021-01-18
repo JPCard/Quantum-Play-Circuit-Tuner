@@ -20,12 +20,41 @@ func rotateSecondCurrentQbitStateArrow(rotX: float, rotY: float, rotZ: float)->v
 	$Spheres/SphereView2Qbits.rotateSecondQbitStateArrow(rotX, rotY, rotZ)
 
 
-func updateCurrentQbitSystem(matrix:Array)->void:
-	$Matrices/MatrixView2Qbits.updateQbitSystem(matrix)
+func updateCurrentQbitSystem(qbitStateMatrix1: Array, qbitStateMatrix2: Array)->void:
+	$Matrices/MatrixView2Qbits.updateQbitSystem(TwoQbitStateFrom1QbitStates(qbitStateMatrix1, qbitStateMatrix2))
 	
-	#TODO pasar de matriz de estado a rotaciones
-	#rotateFirstCurrentQbitStateArrow(rotX, rotY, rotZ)
-	#rotateSecondCurrentQbitStateArrow(rotX, rotY, rotZ)
+	var blochAngles: Array = stateToBlochSphereRotation(qbitStateMatrix1)
+	rotateFirstCurrentQbitStateArrow(0,-blochAngles[0],blochAngles[1])
+	
+	blochAngles = stateToBlochSphereRotation(qbitStateMatrix2)
+	rotateSecondCurrentQbitStateArrow(0,-blochAngles[0],blochAngles[1])
+	
+	$Spheres/SphereView2Qbits.showQbitStates()
+
+
+func updateCurrentTwoQbitSystem(twoQbitStateMatrix: Array)->void:
+	$Matrices/MatrixView2Qbits.updateQbitSystem(twoQbitStateMatrix)
+	
+	if(abs(twoQbitStateMatrix[0][0].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 00
+		rotateFirstCurrentQbitStateArrow(0, 0, 0)
+		rotateSecondCurrentQbitStateArrow(0, 0, 0)
+		sphereView2Qbits.showQbitStates()
+	elif(abs(twoQbitStateMatrix[0][1].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 01
+		rotateFirstCurrentQbitStateArrow(0, 0, 0)
+		rotateSecondCurrentQbitStateArrow(0, PI, 0)
+		sphereView2Qbits.showQbitStates()
+	elif(abs(twoQbitStateMatrix[0][2].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 10
+		rotateFirstCurrentQbitStateArrow(0, PI, 0)
+		rotateSecondCurrentQbitStateArrow(0, 0, 0)
+		sphereView2Qbits.showQbitStates()
+	elif(abs(twoQbitStateMatrix[0][3].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 11
+		rotateFirstCurrentQbitStateArrow(0, PI, 0)
+		rotateSecondCurrentQbitStateArrow(0, PI, 0)
+		sphereView2Qbits.showQbitStates()
+	else:
+		sphereView2Qbits.hideQbitStates()
+
+
 
 
 func rotateSpheresHorizontally(rotY: float)->void:

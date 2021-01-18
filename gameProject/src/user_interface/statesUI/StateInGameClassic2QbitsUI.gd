@@ -18,18 +18,27 @@ func init(auxPrevUI: StateUI, auxInGameClassic1QbitUI: StateUI, auxLevelID: int)
 	
 	$TitleBannerInGame.setTitle("Nivel  " + str(levelID + 1))
 	
-	var initialStateMatrix = GameDataExpert.obtainInitialStateMatrix(levelID)
-	var goalStateMatrix = GameDataExpert.obtainGoalStateMatrix(levelID)
+	var initialStateMatrices = GameDataExpert.obtainInitialStateMatrix(levelID)
+	var initialStateMatrix1 = initialStateMatrices[0]
+	var initialStateMatrix2 = initialStateMatrices[1]
 	
-	updateCurrentQbitViews(initialStateMatrix)
-	$Circuit2Qbits.setInitialQbitState(initialStateMatrix)
+	var goalStateMatrices = GameDataExpert.obtainGoalStateMatrix(levelID)
+	var goalStateMatrix1 = goalStateMatrices[0]
+	var goalStateMatrix2 = goalStateMatrices[1]
 	
-	updateGoalQbitViews(goalStateMatrix)
-	$Circuit2Qbits.setGoalQbitState(goalStateMatrix)
+	updateCurrentQbitViews(initialStateMatrix1, initialStateMatrix2)
+	$Circuit2Qbits.setInitialQbitStates(initialStateMatrix1, initialStateMatrix2)
+	
+	updateGoalQbitViews(goalStateMatrix1, goalStateMatrix2)
+	$Circuit2Qbits.setGoalQbitStates(goalStateMatrix1, goalStateMatrix2)
+	
 	
 	# prepara de antemano el nivel siguiente si es de 1 qbit
 	if(levelID + 1 < GameDataExpert.obtainLevelCount() && GameDataExpert.is1QbitLevel(levelID + 1)):
 		inGameClassic1QbitUI.init(prevUI, self, levelID + 1)
+	
+	
+
 
 
 func win()->void:
@@ -62,17 +71,24 @@ func win()->void:
 	popupLevelCompleted.show()
 
 
-func updateCurrentQbitViews(qbitStateMatrix: Array)->void:
-	$QbitViewClassic2Qbits.updateCurrentQbitSystem(qbitStateMatrix)
+func updateCurrentQbitViews(qbitStateMatrix1: Array, qbitStateMatrix2: Array)->void:
+	$QbitViewClassic2Qbits.updateCurrentQbitSystem(qbitStateMatrix1, qbitStateMatrix2)
 
 
-func updateGoalQbitViews(qbitStateMatrix: Array)->void:
-	$QbitViewClassic2Qbits.updateGoalQbitSystem(qbitStateMatrix)
+func updateCurrentQbitViews2QbitState(twoQbitStateMatrix: Array)->void:
+	$QbitViewClassic2Qbits.updateCurrentTwoQbitSystem(twoQbitStateMatrix)
+
+
+func updateGoalQbitViews(qbitStateMatrix1: Array, qbitStateMatrix2: Array)->void:
+	$QbitViewClassic2Qbits.updateGoalQbitSystem(qbitStateMatrix1, qbitStateMatrix2)
 
 
 
 # cada vez que se entra a este menu
 func _on_Circuit2Qbits_tree_entered():
+	resetUI()
+
+func resetUI()->void:
 	$Circuit2Qbits.resetGateHolders()
 	$PopupLevelCompleted.hide()
 

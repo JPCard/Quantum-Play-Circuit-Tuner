@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/art/InGameUI/circuit/circuitBackground.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/InGameUI/circuit/circuitLine.png" type="Texture" id=2]
-[ext_resource path="res://src/gameplay/circuit/Circuit.gd" type="Script" id=3]
+[ext_resource path="res://src/gameplay/circuit/Circuit1Qbit.gd" type="Script" id=3]
 [ext_resource path="res://src/gameplay/circuit/CircuitScrollContainer.tres" type="Theme" id=4]
 
 [node name="Circuit" type="Control"]
@@ -21,6 +21,7 @@ centered = false
 
 [node name="BackgroundSprite" type="Sprite" parent="."]
 position = Vector2( 128, 0 )
+scale = Vector2( 1, 1.40182 )
 texture = ExtResource( 1 )
 centered = false
 
@@ -28,7 +29,7 @@ centered = false
 margin_left = 129.0
 margin_top = 24.0
 margin_right = 1064.0
-margin_bottom = 222.0
+margin_bottom = 309.0
 mouse_filter = 1
 theme = ExtResource( 4 )
 scroll_vertical_enabled = false

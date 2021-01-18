@@ -27,11 +27,14 @@ func get_drag_data(pos):
 	var gateSprite = Sprite.new()
 	gateSprite.texture = spriteTexture
 	control.add_child(gateSprite)
-	gateSprite.position = Vector2(gateSprite.get_rect().position.x + 85,  gateSprite.get_rect().position.y + 130)
+	gateSprite.position = Vector2(gateSprite.get_rect().position.x + GameGlobals.GATE_DRAG_PREVIEW_OFFSET_X,  gateSprite.get_rect().position.y + GameGlobals.GATE_DRAG_PREVIEW_OFFSET_Y)
 	#print(gateSprite.get_rect().position)
 	set_drag_preview(control)
 	
 	return self
+
+func is2QbitGate()->bool:
+	return getMatrix().size() == 4
 
 
 func getMatrix()->Array:

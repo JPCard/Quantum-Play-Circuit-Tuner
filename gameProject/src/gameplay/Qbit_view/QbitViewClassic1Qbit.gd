@@ -25,14 +25,14 @@ func rotateFirstGoalQbitStateArrow(rotX: float, rotY: float, rotZ: float)->void:
 func updateCurrentQbitSystem(qbitStateMatrix:Array)->void:
 	$Matrices/CurrentMatrixView1Qbit.updateQbitSystem(qbitStateMatrix)
 	
-	#TODO pasar de matriz de estado a rotaciones
-	#rotateFirstCurrentQbitStateArrow(rotX,rotY,rotZ)
+	var blochAngles: Array = stateToBlochSphereRotation(qbitStateMatrix)
+	rotateFirstCurrentQbitStateArrow(0,-blochAngles[0],blochAngles[1])
 
 func updateGoalQbitSystem(qbitStateMatrix:Array)->void:
 	$Matrices/GoalMatrixView1Qbit.updateQbitSystem(qbitStateMatrix)
 	
-	#TODO pasar de matriz de estado a rotaciones
-	#rotateFirstGoalQbitStateArrow(rotX,rotY,rotZ)
+	var blochAngles: Array = stateToBlochSphereRotation(qbitStateMatrix)
+	rotateFirstGoalQbitStateArrow(0,-blochAngles[0],blochAngles[1])
 
 
 func rotateSpheresHorizontally(rotY: float)->void:

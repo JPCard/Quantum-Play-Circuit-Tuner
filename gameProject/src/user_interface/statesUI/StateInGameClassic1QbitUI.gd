@@ -71,6 +71,10 @@ func updateGoalQbitViews(qbitStateMatrix: Array)->void:
 
 # cada vez que se entra a este menu
 func _on_Circuit_tree_entered():
+	resetUI()
+
+
+func resetUI():
 	$Circuit.resetGateHolders()
 	$PopupLevelCompleted.hide()
 

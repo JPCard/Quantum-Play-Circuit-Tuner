@@ -38,7 +38,7 @@ func _init():
 	addLevel1Qbit(complex0, complex1, complex1, complex0)
 	addLevel1Qbit(complex1, complex0, complexNegative1, complex0)
 	addLevel1Qbit(complex0, complexNegative1, complex1, complex0)
-	addLevel2Qbits(complex0, complex0, complex0, complex1, complex1, complex0, complex0, complex0)
+	addLevel2Qbits(complex0, complex1, complex0, complex1, complex1, complex0, complex1, complex0)
 
 
 # Pre: - la suma de las probabilidades de initialComplex0 y initialComplex1 debe ser 1
@@ -49,13 +49,15 @@ func addLevel1Qbit(initialComplex0: Complex, initialComplex1: Complex, goalCompl
 	goalStateMatrices.append([[goalComplex0, goalComplex1]])
 
 
-# Pre: - la suma de las probabilidades de initialComplex00, initialComplex01, initialComplex10 y initialComplex11 debe ser 1
-#      - la suma de las probabilidades de goalComplex00, goalComplex01, goalComplex10 y goalComplex11 debe ser 1
-func addLevel2Qbits(initialComplex00: Complex, initialComplex01: Complex, initialComplex10: Complex, initialComplex11: Complex, 
-					goalComplex00: Complex, goalComplex01: Complex, goalComplex10: Complex, goalComplex11: Complex)->void:
+# Pre: - la suma de las probabilidades de initialComplex0Qbit1, initialComplex1Qbit1 debe ser 1
+#	   - la suma de las probabilidades de initialComplex0Qbit2, initialComplex1Qbit2 debe ser 1
+#	   - la suma de las probabilidades de goalComplex0Qbit1, goalComplex1Qbit1 debe ser 1
+#	   - la suma de las probabilidades de goalComplex0Qbit2, goalComplex1Qbit2 debe ser 1
+func addLevel2Qbits(initialComplex0Qbit1: Complex, initialComplex1Qbit1: Complex, initialComplex0Qbit2: Complex, initialComplex1Qbit2: Complex, 
+					goalComplex0Qbit1: Complex, goalComplex1Qbit1: Complex, goalComplex0Qbit2: Complex, goalComplex1Qbit2: Complex)->void:
 	
-	initialStateMatrices.append([[initialComplex00, initialComplex01, initialComplex10, initialComplex11]])
-	goalStateMatrices.append([[goalComplex00, goalComplex01, goalComplex10, goalComplex11]])
+	initialStateMatrices.append([ [[initialComplex0Qbit1, initialComplex1Qbit1]], [[initialComplex0Qbit2, initialComplex1Qbit2]] ])
+	goalStateMatrices.append([ [[goalComplex0Qbit1, goalComplex1Qbit1]], [[goalComplex0Qbit2, goalComplex1Qbit2]] ]) 
 
 
 
