@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/user_interface/statesUI/StateInGameUI.gd" type="Script" id=1]
 [ext_resource path="res://src/user_interface/Background.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/gameplay/gates/GatePauliX.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/gameplay/gates/GateHadamard.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/gameplay/gates/GatePauliZ.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/user_interface/RetryLevelBt.tscn" type="PackedScene" id=10]
 
 [node name="StateInGameUI" instance=ExtResource( 3 )]
 script = ExtResource( 1 )
@@ -23,7 +24,13 @@ margin_top = 17.0
 margin_right = 194.0
 margin_bottom = 143.0
 
-[node name="GatesHBoxContainer" type="HBoxContainer" parent="." index="3"]
+[node name="RetryLevelBt" parent="." index="3" instance=ExtResource( 10 )]
+margin_left = 144.0
+margin_top = 192.0
+margin_right = 306.0
+margin_bottom = 349.0
+
+[node name="GatesHBoxContainer" type="HBoxContainer" parent="." index="4"]
 margin_left = 38.0
 margin_top = 883.0
 margin_right = 1158.0

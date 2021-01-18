@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/art/InGameUI/retryBt/retryBt_pressed.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/InGameUI/retryBt/retryBt_unpressed.png" type="Texture" id=2]
+
+[node name="RetryLevelBt" type="TextureButton"]
+margin_right = 162.0
+margin_bottom = 157.0
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
