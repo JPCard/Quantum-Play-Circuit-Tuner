@@ -16,6 +16,12 @@ ambient_light_sky_contribution = 0.29
 [sub_resource type="World" id=2]
 environment = SubResource( 1 )
 
+[sub_resource type="DynamicFont" id=3]
+size = 30
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+
 [sub_resource type="DynamicFont" id=4]
 size = 30
 use_mipmaps = true
@@ -23,12 +29,6 @@ use_filter = true
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=5]
-size = 30
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=3]
 size = 200
 use_mipmaps = true
 use_filter = true
@@ -64,7 +64,7 @@ margin_left = 154.0
 margin_top = 41.9831
 margin_right = 209.0
 margin_bottom = 79.9831
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.0666667, 0.176471, 0.305882, 1 )
 text = "|0>"
 __meta__ = {
@@ -76,7 +76,7 @@ margin_left = 136.0
 margin_top = 208.0
 margin_right = 183.0
 margin_bottom = 252.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.0666667, 0.176471, 0.305882, 1 )
 text = "|1>"
 __meta__ = {
@@ -84,6 +84,7 @@ __meta__ = {
 }
 
 [node name="UndefinedSphereSprite" type="Sprite" parent="."]
+visible = false
 self_modulate = Color( 0.301961, 0.301961, 0.301961, 1 )
 position = Vector2( -16.8179, -1.10092 )
 scale = Vector2( 1.12731, 1.01045 )
@@ -94,7 +95,7 @@ centered = false
 margin_top = -1.0
 margin_right = 252.0
 margin_bottom = 267.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0.337255, 0.615686, 0.976471, 1 )
 text = "?"
 align = 1

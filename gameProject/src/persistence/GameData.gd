@@ -38,8 +38,10 @@ func _init():
 	addLevel1Qbit(complex0, complex1, complex1, complex0)
 	addLevel1Qbit(complex1, complex0, complexNegative1, complex0)
 	addLevel1Qbit(complex0, complexNegative1, complex1, complex0)
-	addLevel2Qbits(complex0, complex1, complex0, complex1, complex1, complex0, complex1, complex0)
-
+	addLevel2QbitsInitialStatesGoalStates(complex0, complex1, complex0, complex1, complex1, complex0, complex1, complex0)
+	addLevel2QbitsInitialStateGoalStates(complex1oversqrt2, complex0, complex0, complex1oversqrt2, complex1, complex0, complex1, complex0)
+	addLevel2QbitsInitialStatesGoalState(complex1, complex0, complex0, complex1, complex1oversqrt2, complex0, complex0, complex1oversqrt2)
+	addLevel2QbitsInitialStateGoalState(complex1oversqrt2, complex0, complex0, complex1oversqrt2, complex0, complex1oversqrt2, complex1oversqrt2, complex0)
 
 # Pre: - la suma de las probabilidades de initialComplex0 y initialComplex1 debe ser 1
 #      - la suma de las probabilidades de goalComplex0 y goalComplex1 debe ser 1
@@ -53,11 +55,50 @@ func addLevel1Qbit(initialComplex0: Complex, initialComplex1: Complex, goalCompl
 #	   - la suma de las probabilidades de initialComplex0Qbit2, initialComplex1Qbit2 debe ser 1
 #	   - la suma de las probabilidades de goalComplex0Qbit1, goalComplex1Qbit1 debe ser 1
 #	   - la suma de las probabilidades de goalComplex0Qbit2, goalComplex1Qbit2 debe ser 1
-func addLevel2Qbits(initialComplex0Qbit1: Complex, initialComplex1Qbit1: Complex, initialComplex0Qbit2: Complex, initialComplex1Qbit2: Complex, 
+# sistemas de 2 qbits con iniciales 1x2 y objetivos 1x2
+func addLevel2QbitsInitialStatesGoalStates(initialComplex0Qbit1: Complex, initialComplex1Qbit1: Complex, initialComplex0Qbit2: Complex, initialComplex1Qbit2: Complex, 
 					goalComplex0Qbit1: Complex, goalComplex1Qbit1: Complex, goalComplex0Qbit2: Complex, goalComplex1Qbit2: Complex)->void:
 	
 	initialStateMatrices.append([ [[initialComplex0Qbit1, initialComplex1Qbit1]], [[initialComplex0Qbit2, initialComplex1Qbit2]] ])
 	goalStateMatrices.append([ [[goalComplex0Qbit1, goalComplex1Qbit1]], [[goalComplex0Qbit2, goalComplex1Qbit2]] ]) 
+
+
+# Pre: - la suma de las probabilidades de initialComplex0Qbit1, initialComplex1Qbit1 debe ser 1
+#	   - la suma de las probabilidades de initialComplex0Qbit2, initialComplex1Qbit2 debe ser 1
+#	   - la suma de las probabilidades de goalComplex00, goalComplex01, goalComplex10, goalComplex11 debe ser 1
+# todo sistemas de 2 qbits con iniciales 1x2 y objetivos 1x4
+func addLevel2QbitsInitialStatesGoalState(initialComplex0Qbit1: Complex, initialComplex1Qbit1: Complex, initialComplex0Qbit2: Complex, initialComplex1Qbit2: Complex, 
+					goalComplex00: Complex, goalComplex01: Complex, goalComplex10: Complex, goalComplex11: Complex)->void:
+	
+	initialStateMatrices.append([ [[initialComplex0Qbit1, initialComplex1Qbit1]], [[initialComplex0Qbit2, initialComplex1Qbit2]] ])
+	goalStateMatrices.append([ [[goalComplex00, goalComplex01, goalComplex10, goalComplex11]] ]) 
+
+
+
+# Pre: - la suma de las probabilidades de initialComplex00, initialComplex01, initialComplex10, initialComplex11 debe ser 1
+#	   - la suma de las probabilidades de goalComplex0Qbit1, goalComplex1Qbit1 debe ser 1
+#	   - la suma de las probabilidades de goalComplex0Qbit2, goalComplex1Qbit2 debe ser 1
+# sistemas de 2 qbits con inicial 1x4 y objetivos 1x2
+func addLevel2QbitsInitialStateGoalStates(initialComplex00: Complex, initialComplex01: Complex, initialComplex10: Complex, initialComplex11: Complex, 
+					goalComplex0Qbit1: Complex, goalComplex1Qbit1: Complex, goalComplex0Qbit2: Complex, goalComplex1Qbit2: Complex)->void:
+	
+	initialStateMatrices.append([ [[initialComplex00, initialComplex01, initialComplex10, initialComplex11]] ])
+	goalStateMatrices.append([ [[goalComplex0Qbit1, goalComplex1Qbit1]], [[goalComplex0Qbit2, goalComplex1Qbit2]] ]) 
+
+
+# Pre: - la suma de las probabilidades de initialComplex00, initialComplex01, initialComplex10, initialComplex11 debe ser 1
+#	   - la suma de las probabilidades de goalComplex00, goalComplex01, goalComplex10, goalComplex11 debe ser 1
+# sistemas de 2 qbits con inicial 1x4 y objetivo 1x4
+func addLevel2QbitsInitialStateGoalState(initialComplex00: Complex, initialComplex01: Complex, initialComplex10: Complex, initialComplex11: Complex, 
+					goalComplex00: Complex, goalComplex01: Complex, goalComplex10: Complex, goalComplex11: Complex)->void:
+	
+	initialStateMatrices.append([ [[initialComplex00, initialComplex01, initialComplex10, initialComplex11]] ])
+	goalStateMatrices.append([ [[goalComplex00, goalComplex01, goalComplex10, goalComplex11]] ]) 
+
+
+
+
+
 
 
 
