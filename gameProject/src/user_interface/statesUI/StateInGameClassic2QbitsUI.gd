@@ -19,18 +19,34 @@ func init(auxPrevUI: StateUI, auxInGameClassic1QbitUI: StateUI, auxLevelID: int)
 	$TitleBannerInGame.setTitle("Nivel  " + str(levelID + 1))
 	
 	var initialStateMatrices = GameDataExpert.obtainInitialStateMatrix(levelID)
-	var initialStateMatrix1 = initialStateMatrices[0]
-	var initialStateMatrix2 = initialStateMatrices[1]
+	
+	if(initialStateMatrices.size() == 2): # estados 1x2
+		var initialStateMatrix1 = initialStateMatrices[0]
+		var initialStateMatrix2 = initialStateMatrices[1]
+		
+		updateCurrentQbitViews(initialStateMatrix1, initialStateMatrix2)
+		$Circuit2Qbits.setInitialQbitStates(initialStateMatrix1, initialStateMatrix2)
+	else: #estado 1x4
+		var initial2QbitStateMatrix = initialStateMatrices[0]
+		
+		updateCurrentQbitViews2QbitState(initial2QbitStateMatrix)
+		$Circuit2Qbits.setInitial2QbitState(initial2QbitStateMatrix)
+	
 	
 	var goalStateMatrices = GameDataExpert.obtainGoalStateMatrix(levelID)
-	var goalStateMatrix1 = goalStateMatrices[0]
-	var goalStateMatrix2 = goalStateMatrices[1]
 	
-	updateCurrentQbitViews(initialStateMatrix1, initialStateMatrix2)
-	$Circuit2Qbits.setInitialQbitStates(initialStateMatrix1, initialStateMatrix2)
+	if(goalStateMatrices.size() == 2): # estados 1x2
+		var goalStateMatrix1 = goalStateMatrices[0]
+		var goalStateMatrix2 = goalStateMatrices[1]
+		
+		updateGoalQbitViews(goalStateMatrix1, goalStateMatrix2)
+		$Circuit2Qbits.setGoalQbitStates(goalStateMatrix1, goalStateMatrix2)
+	else: #estado 1x4
+		var goal2QbitStateMatrix = goalStateMatrices[0]
+		
+		updateGoalQbitViews2QbitState(goal2QbitStateMatrix)
+		$Circuit2Qbits.setGoal2QbitState(goal2QbitStateMatrix)
 	
-	updateGoalQbitViews(goalStateMatrix1, goalStateMatrix2)
-	$Circuit2Qbits.setGoalQbitStates(goalStateMatrix1, goalStateMatrix2)
 	
 	
 	# prepara de antemano el nivel siguiente si es de 1 qbit
@@ -82,7 +98,8 @@ func updateCurrentQbitViews2QbitState(twoQbitStateMatrix: Array)->void:
 func updateGoalQbitViews(qbitStateMatrix1: Array, qbitStateMatrix2: Array)->void:
 	$QbitViewClassic2Qbits.updateGoalQbitSystem(qbitStateMatrix1, qbitStateMatrix2)
 
-
+func updateGoalQbitViews2QbitState(twoQbitStateMatrix: Array)->void:
+	$QbitViewClassic2Qbits.updateGoalTwoQbitSystem(twoQbitStateMatrix)
 
 # cada vez que se entra a este menu
 func _on_Circuit2Qbits_tree_entered():

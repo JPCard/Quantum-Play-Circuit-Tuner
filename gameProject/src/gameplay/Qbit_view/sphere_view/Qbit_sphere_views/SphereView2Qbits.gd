@@ -42,8 +42,8 @@ func rotateSecondQbitStateArrow(rotX: float, rotY: float, rotZ: float)->void:
 	$BlochSphere2D_2.rotateStateArrow(rotX, rotZ, rotY)
 
 func hideQbitStates()->void:
-	blochSphere2D.hideQbitState()
-	blochSphere2D_2.hideQbitState()
+	$BlochSphere2D.hideQbitState()
+	$BlochSphere2D_2.hideQbitState()
 
 func showQbitStates()->void:
 	$BlochSphere2D.showQbitState()

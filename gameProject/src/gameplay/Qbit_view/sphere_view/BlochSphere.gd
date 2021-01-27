@@ -29,7 +29,7 @@ func showStateArrow()->void:
 	$BlochSphereContainer/StateArrow.show()
 
 func hideStateArrow()->void:
-	stateArrow.hide()
+	$BlochSphereContainer/StateArrow.hide()
 
 
 

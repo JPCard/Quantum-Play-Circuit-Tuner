@@ -44,7 +44,8 @@ func obtainGoalStateMatrix(levelID: int)->Array:
 	return Persistence.loadGoalStateMatrix(levelID)
 
 func is1QbitLevel(levelID: int)->bool:
-	return obtainInitialStateMatrix(levelID).size() == 1 # el estado de sistema de 1 qbit tiene 1 solo estado
+	var initialStateMatrix = obtainInitialStateMatrix(levelID)
+	return initialStateMatrix.size() == 1 && initialStateMatrix[0].size() == 2 # el estado de sistema de 1 qbit tiene 1 solo estado 1x2
 
 
 

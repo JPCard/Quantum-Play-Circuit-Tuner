@@ -50,6 +50,8 @@ func updateCurrentQbitSystem(qbitStateMatrix1:Array, qbitStateMatrix2:Array)->vo
 func updateCurrentTwoQbitSystem(twoQbitStateMatrix: Array)->void:
 	$Matrices/CurrentMatrixView2Qbits.updateQbitSystem(twoQbitStateMatrix)
 	
+	currentSphereView2Qbits = $Spheres/CurrentSphereView2Qbits
+	
 	if(abs(twoQbitStateMatrix[0][0].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 00
 		rotateFirstCurrentQbitStateArrow(0, 0, 0)
 		rotateSecondCurrentQbitStateArrow(0, 0, 0)
@@ -79,6 +81,32 @@ func updateGoalQbitSystem(qbitStateMatrix1:Array, qbitStateMatrix2:Array)->void:
 	blochAngles = stateToBlochSphereRotation(qbitStateMatrix2)
 	rotateSecondGoalQbitStateArrow(0,-blochAngles[0],blochAngles[1])
 	
+	$Spheres/GoalSphereView2Qbits.showQbitStates()
+
+
+func updateGoalTwoQbitSystem(twoQbitStateMatrix: Array)->void:
+	$Matrices/GoalMatrixView2Qbits.updateQbitSystem(twoQbitStateMatrix)
+	
+	goalSphereView2Qbits =  $Spheres/GoalSphereView2Qbits
+	
+	if(abs(twoQbitStateMatrix[0][0].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 00
+		rotateFirstGoalQbitStateArrow(0, 0, 0)
+		rotateSecondGoalQbitStateArrow(0, 0, 0)
+		goalSphereView2Qbits.showQbitStates()
+	elif(abs(twoQbitStateMatrix[0][1].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 01
+		rotateFirstGoalQbitStateArrow(0, 0, 0)
+		rotateSecondGoalQbitStateArrow(0, PI, 0)
+		goalSphereView2Qbits.showQbitStates()
+	elif(abs(twoQbitStateMatrix[0][2].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 10
+		rotateFirstGoalQbitStateArrow(0, PI, 0)
+		rotateSecondGoalQbitStateArrow(0, 0, 0)
+		goalSphereView2Qbits.showQbitStates()
+	elif(abs(twoQbitStateMatrix[0][3].probability() - 1) <= GameGlobals.NUMERIC_TOLERANCE): # estado 11
+		rotateFirstGoalQbitStateArrow(0, PI, 0)
+		rotateSecondGoalQbitStateArrow(0, PI, 0)
+		goalSphereView2Qbits.showQbitStates()
+	else:
+		goalSphereView2Qbits.hideQbitStates()
 
 
 

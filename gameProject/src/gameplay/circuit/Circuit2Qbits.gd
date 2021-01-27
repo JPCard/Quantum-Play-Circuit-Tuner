@@ -13,6 +13,7 @@ onready var hBoxContainer: HBoxContainer = $ScrollContainer/HBoxContainer
 
 var initialQbitState1 : Array = [[Complex.new().init(0,0), Complex.new().init(1,0)]]
 var initialQbitState2 : Array = [[Complex.new().init(0,0), Complex.new().init(1,0)]]
+var initial2QbitState : Array = [] # para poder representar estados entrelazados
 var goalQbitState1 : Array
 var goalQbitState2 : Array
 var goal2QbitState : Array 
@@ -26,6 +27,7 @@ var complex1: Complex = Complex.new().init(1, 0)
 var pauliXMatrix : Array = [[complex0, complex1],[complex1, complex0]]
 
 var classicMode: bool setget setClassicMode, isClassicMode
+var initialOneQbitState: bool
 
 func _ready():
 	mutexGates = Mutex.new()
@@ -92,12 +94,23 @@ func createVBoxContainer()->VBoxContainer:
 func setInitialQbitStates(auxQbitState1: Array, auxQbitState2: Array)->void:
 	initialQbitState1 = auxQbitState1
 	initialQbitState2 = auxQbitState2
-	
+	initialOneQbitState = true # para el posterior tratamiento al actualizar el estado
+
+
+func setInitial2QbitState(aux2QbitState: Array)->void:
+	initial2QbitState = aux2QbitState
+	initialOneQbitState = false # para el posterior tratamiento al actualizar el estado
+
 
 func setGoalQbitStates(auxQbitState1: Array, auxQbitState2: Array)->void:
 	goalQbitState1 = auxQbitState1
 	goalQbitState2 = auxQbitState2
 	goal2QbitState = QbitView.TwoQbitStateFrom1QbitStates(goalQbitState1, goalQbitState2)
+
+func setGoal2QbitState(aux2QbitState: Array)->void:
+	goal2QbitState = aux2QbitState
+
+
 
 
 func addGateQbit1(gate, index)->void:
@@ -176,8 +189,8 @@ func calculateQbitState()->void:
 	
 	var auxCurrentQbitSate1 : Array = initialQbitState1
 	var auxCurrentQbitSate2 : Array = initialQbitState2
-	var oneQbitState : bool = true
-	var auxCurrent2QbitsState : Array
+	var oneQbitState : bool = initialOneQbitState
+	var auxCurrent2QbitsState : Array = initial2QbitState
 	var aux2QbitGateMatrix : Array
 	
 	

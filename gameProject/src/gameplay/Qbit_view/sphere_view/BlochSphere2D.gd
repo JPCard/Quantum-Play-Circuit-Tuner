@@ -17,7 +17,7 @@ var last_position = Vector2()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	showQbitState()
+	#showQbitState()
 	$ColorRect.hide()
 	renderSphere()
 
@@ -45,8 +45,8 @@ func moveToSecondGoalSphereLocation()->void:
 	blochSphere.translation = Vector3(SPHERE_SEPARATION * 3, 0, 0)
 
 func hideQbitState()->void:
-	undefinedSphereSprite.show()
-	blochSphere.hideStateArrow()
+	$UndefinedSphereSprite.show()
+	$Viewport/BlochSphere.hideStateArrow()
 
 func showQbitState()->void:
 	$Viewport/BlochSphere.showStateArrow()
