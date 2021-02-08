@@ -39,17 +39,17 @@ func _init():
 	addLevel1Qbit(complex1, complex0, complex0, complex1)
 	#Nivel 2: |0> --------------|0>
 	#         |0> -----|X|------|1>
-	addLevel2Qbits(complex1, complex0, complex1, complex0, complex1, complex0, complex0, complex1)
+	addLevel2QbitsInitialStatesGoalStates(complex1, complex0, complex1, complex0, complex1, complex0, complex0, complex1)
 	#Nivel 3: |0> -----|H|------|+>
 	addLevel1Qbit(complex1, complex0, complex1oversqrt2, complex1oversqrt2)
 	#Nivel 4: |0> --|X|---|H|---|->
 	addLevel1Qbit(complex1, complex0, complex1oversqrt2, complexNegative1oversqrt2)
 	#Nivel 5: |0> -----|H|------|+>
 	#         |0> -----|H|------|+>
-	addLevel2Qbits(complex1, complex0, complex1, complex0, complex1oversqrt2, complex1oversqrt2, complex1oversqrt2, complex1oversqrt2)
+	addLevel2QbitsInitialStatesGoalStates(complex1, complex0, complex1, complex0, complex1oversqrt2, complex1oversqrt2, complex1oversqrt2, complex1oversqrt2)
 	#Nivel 6: |0> -----|H|--|---
 	#         |0> ----------X---
-	addLevel2Qbits(complex1, complex0, complex1, complex0, complex1oversqrt2, complex0, complex0, complex1oversqrt2)
+	addLevel2QbitsInitialStatesGoalState(complex1, complex0, complex1, complex0, complex1oversqrt2, complex0, complex0, complex1oversqrt2)
 	
 # Pre: - la suma de las probabilidades de initialComplex0 y initialComplex1 debe ser 1
 #      - la suma de las probabilidades de goalComplex0 y goalComplex1 debe ser 1
