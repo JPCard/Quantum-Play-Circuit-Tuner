@@ -6,11 +6,12 @@ onready var popupLevelCompleted = $PopupLevelCompleted
 
 var levelID: int
 var inGameClassic1QbitUI: StateUI
+var pendingLoadNextLevel1Qbit: bool = false
 
 func _ready():
 	$Circuit2Qbits.setClassicMode(true)
 
-func init(auxPrevUI: StateUI, auxInGameClassic1QbitUI: StateUI, auxLevelID: int)->void:
+func init(auxPrevUI: StateUI, auxInGameClassic1QbitUI: StateUI, auxLevelID: int, isCurrentLevel: bool)->void:
 	prevUI = auxPrevUI
 	inGameClassic1QbitUI = auxInGameClassic1QbitUI
 	levelID = auxLevelID
@@ -48,10 +49,12 @@ func init(auxPrevUI: StateUI, auxInGameClassic1QbitUI: StateUI, auxLevelID: int)
 		$Circuit2Qbits.setGoal2QbitState(goal2QbitStateMatrix)
 	
 	
-	
-	# prepara de antemano el nivel siguiente si es de 1 qbit
-	if(levelID + 1 < GameDataExpert.obtainLevelCount() && GameDataExpert.is1QbitLevel(levelID + 1)):
-		inGameClassic1QbitUI.init(prevUI, self, levelID + 1)
+	if(!isCurrentLevel):
+		pendingLoadNextLevel1Qbit = true
+	elif(levelID + 1 < GameDataExpert.obtainLevelCount() && GameDataExpert.is1QbitLevel(levelID + 1)):
+		# prepara de antemano el nivel siguiente si es de 1 qbit
+		# isCurrentLevel elimina el bug de cargar mal el nivel si se alterna entre niveles de 1 y 2 qbits
+		inGameClassic1QbitUI.init(prevUI, self, levelID + 1, false) # no es el nivel actual sino que es el siguiente
 	
 	
 
@@ -113,8 +116,10 @@ func resetUI()->void:
 
 func toNextLevel()->void:
 	if(!GameDataExpert.is1QbitLevel(levelID + 1)):
-		init(prevUI, inGameClassic1QbitUI, levelID + 1)
+		init(prevUI, inGameClassic1QbitUI, levelID + 1, true)
 	else:
+		if(pendingLoadNextLevel1Qbit):
+			inGameClassic1QbitUI.init(prevUI, self, levelID + 1, true) # carga el nivel pendiente
 		toInGameClassic1QbitUI()
 	
 	_on_Circuit2Qbits_tree_entered()

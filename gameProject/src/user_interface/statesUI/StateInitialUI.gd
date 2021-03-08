@@ -23,9 +23,9 @@ func updateCurrentLevel()->void:
 		currentLevel1Qbit = GameDataExpert.is1QbitLevel(currentLevelID)
 		
 		if(currentLevel1Qbit):
-			inGameClassic1QbitUI.init(levelSelectUI, inGameClassic2QbitsUI, currentLevelID)
+			inGameClassic1QbitUI.init(levelSelectUI, inGameClassic2QbitsUI, currentLevelID, true)
 		else:
-			inGameClassic2QbitsUI.init(levelSelectUI, inGameClassic1QbitUI, currentLevelID)
+			inGameClassic2QbitsUI.init(levelSelectUI, inGameClassic1QbitUI, currentLevelID, true)
 	
 
 
