@@ -7,9 +7,10 @@ onready var popupLevelCompleted = $PopupLevelCompleted
 
 var levelID: int
 var inGameClassic2QbitsUI: StateUI
+var pendingLoadNextLevel2Qbits: bool = false
 
-
-func init(auxPrevUI: StateUI, auxInGameClassic2QbitsUI: StateUI, auxLevelID: int)->void:
+func init(auxPrevUI: StateUI, auxInGameClassic2QbitsUI: StateUI, auxLevelID: int, isCurrentLevel:bool)->void:
+	
 	prevUI = auxPrevUI
 	inGameClassic2QbitsUI = auxInGameClassic2QbitsUI
 	levelID = auxLevelID
@@ -25,9 +26,11 @@ func init(auxPrevUI: StateUI, auxInGameClassic2QbitsUI: StateUI, auxLevelID: int
 	updateGoalQbitViews(goalStateMatrix)
 	$Circuit.setGoalQbitState(goalStateMatrix)
 	
-	# prepara de antemano el nivel siguiente si es de 2 qbits
-	if(levelID + 1 < GameDataExpert.obtainLevelCount() && !GameDataExpert.is1QbitLevel(levelID + 1)):
-		inGameClassic2QbitsUI.init(prevUI, self, levelID + 1)
+	if(!isCurrentLevel):
+		pendingLoadNextLevel2Qbits = true
+	elif(levelID + 1 < GameDataExpert.obtainLevelCount() && !GameDataExpert.is1QbitLevel(levelID + 1)):
+		# prepara de antemano el nivel siguiente si es de 2 qbits
+		inGameClassic2QbitsUI.init(prevUI, self, levelID + 1, false) # no es el nivel actual sino que es el siguiente
 
 
 
@@ -81,8 +84,10 @@ func resetUI():
 
 func toNextLevel()->void:
 	if(GameDataExpert.is1QbitLevel(levelID + 1)):
-		init(prevUI, inGameClassic2QbitsUI, levelID + 1)
+		init(prevUI, inGameClassic2QbitsUI, levelID + 1, true)
 	else:
+		if(pendingLoadNextLevel2Qbits):
+			inGameClassic2QbitsUI.init(prevUI, self, levelID + 1, true) # carga el nivel pendiente
 		toInGameClassic2QbitsUI()
 	
 	_on_Circuit_tree_entered()

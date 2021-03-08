@@ -73,6 +73,7 @@ func createLevelBtRow(rowNumber: int, levelBtInRow: int, maxUnlockedlevelID: int
 		levelID = rowNumber*COUNTRY_COUNT_X + j
 		unlocked = levelID <= maxUnlockedlevelID
 		
+		
 		if (unlocked):
 			# unlocked
 			if(GameDataExpert.obtainLevelCompletionState(levelID)):
@@ -88,6 +89,7 @@ func createLevelBtRow(rowNumber: int, levelBtInRow: int, maxUnlockedlevelID: int
 		
 		if unlocked:
 			auxLevelBt.connect("pressed", self, "toInGameClassicUI",[auxLevelBt.getLevelID()])
+			
 		
 		levelBts[levelID] = auxLevelBt
 		
@@ -129,11 +131,12 @@ func createHBoxContainer()->HBoxContainer:
 
 
 func toInGameClassicUI(levelID: int):
+	
 	if(GameDataExpert.is1QbitLevel(levelID)):
-		inGameClassic1QbitUI.init(self, inGameClassic2QbitsUI, levelID)
+		inGameClassic1QbitUI.init(self, inGameClassic2QbitsUI, levelID, true)
 		get_parent().call_deferred("add_child",inGameClassic1QbitUI)
 	else:
-		inGameClassic2QbitsUI.init(self, inGameClassic1QbitUI, levelID)
+		inGameClassic2QbitsUI.init(self, inGameClassic1QbitUI, levelID, true)
 		get_parent().call_deferred("add_child",inGameClassic2QbitsUI)
 	
 	get_parent().call_deferred("remove_child",self)
